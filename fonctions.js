@@ -11,6 +11,7 @@ function getAltitudeGpxz() {
  function getAltitude() {
     fetch('https://maps.googleapis.com/maps/api/elevation/json?locations=48.856614,2.3522219&key=AIzaSyA8A69egVsPgDDrAXVWXdtW_HrpKLvmiOM', {mode: 'cors'})
     .then(response => response.json())
+    .catch(error => console.log(error))
     .then(data => {
         console.log(data.results[0].elevation);
         document.getElementById('altitude').innerHTML = data.results[0].elevation;
