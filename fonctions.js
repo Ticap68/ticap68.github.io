@@ -15,7 +15,7 @@ function getAltitudeGpxz() {
         console.log(data.results[0].elevation);
         document.getElementById('altitude').innerHTML = data.results[0].elevation;
     })
-    .catch(error => alert("Erreur : " + error));
+    //.catch(error => alert("Erreur : " + error));
  }
 
 
