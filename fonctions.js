@@ -1,3 +1,5 @@
+const Key = AIzaSyA8A69egVsPgDDrAXVWXdtW_HrpKLvmiOM;
+
 function getAltitudeGpxz() {
   fetch('https://gpxz.com/api/elevation?lat=48.856614&lon=2.3522219000000177')
     .then(response => response.json())
@@ -7,7 +9,7 @@ function getAltitudeGpxz() {
 }
 
 function getAltitude() {
-  fetch('https://maps.googleapis.com/maps/api/elevation/json?locations=48.856614,2.3522219&key=AIzaSyA8A69egVsPgDDrAXVWXdtW_HrpKLvmiOM', { mode: 'cors' })
+  fetch('https://maps.googleapis.com/maps/api/elevation/json?locations=48.856614,2.3522219&key=' + Key, { mode: 'cors' })
     .then(response => response.json())
     //.catch(error=>console.log(error))
     .then(data => {
@@ -21,15 +23,21 @@ function getAltitude() {
 var axios = require('axios');
 var config = {
   method: 'get',
-  url: 'https://maps.googleapis.com/maps/api/elevation/json?locations=39.7391536%2C-104.9847034&key=AIzaSyA8A69egVsPgDDrAXVWXdtW_HrpKLvmiOM',
+  url: 'https://maps.googleapis.com/maps/api/elevation/json?locations=39.7391536%2C-104.9847034&key=' + Key,
   headers: {}
 };
 
-axios(config).then(function (response) { console.log(JSON.stringify(response.data)); }).catch(function (error) { console.log(error); });
+axios(config)
+  .then(function (response) {
+    console.log(JSON.stringify(response.data));
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
 
 
 
- //window.onload = getAltitude;
+//window.onload = getAltitude;
 
 
 
