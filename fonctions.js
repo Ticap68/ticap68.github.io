@@ -17,7 +17,5 @@ axios(config)
 
 
 
-//window.onload = getAltitude;
-
 
 
