@@ -12,14 +12,12 @@ const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 map.on('click', function (e) {
   var coord = e.latlng.lat + "," + e.latlng.lng;
   document.getElementById('lat').innerHTML = coord;
+
 });
-
-
-
 
 var config = {
   method: 'get',
-  url: 'https://api.open-elevation.com/api/v1/lookup?locations=41.161758,-8.583933',
+  url: 'https://api.open-elevation.com/api/v1/lookup?locations=41.161758,-8.583933'+coord,
   headers: {}
 };
 
