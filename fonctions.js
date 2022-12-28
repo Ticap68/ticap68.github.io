@@ -20,7 +20,7 @@ function getAltitude() {
 //.catch(error => alert("Erreur : " +error));}
 //document.getElementById('altitude').innerHTML = data.results[0].elevation;
 
-var axios = require('axios');
+//var axios = require('axios');
 var config = {
   method: 'get',
   url: 'https://api.open-elevation.com/api/v1/lookup?locations=41.161758,-8.583933',
