@@ -1,9 +1,21 @@
 const map = L.map('map').setView([51.505, -0.09], 13);
 
+var coords = null;
+
 const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
   maxZoom: 19,
   attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
+
+
+
+map.on('click', function (e) {
+  var coord = e.latlng.lat + "," + e.latlng.lng;
+  document.getElementById('lat').innerHTML = coord;
+});
+
+
+
 
 var config = {
   method: 'get',
@@ -23,9 +35,3 @@ axios(config)
 
 
 
-map.on('click', function(e) {
-  var coord = e.latlng.lat + ", " + e.latlng.lng;
-  // console.log("Lat, Lon : " + e.latlng.lat + ", " + e.latlng.lng)
-  console.log(e.latlng)
-  document.getElementById('lat').innerHTML = "Lat, Lon : " + e.latlng.lat + ", " + e.latlng.lng;
-});
