@@ -21,3 +21,8 @@ axios(config)
     console.log(error);
   });
 
+map.on('click', function (e) {
+  var lat = event.latLng.lat();
+  var lng = event.latLng.lng();
+  document.getElementById('lat').innerHTML = lat;
+}
