@@ -24,7 +24,7 @@ function getAltitude() {
 var config = {
   method: 'get',
   url: 'https://api.open-elevation.com/api/v1/lookup?locations=41.161758,-8.583933',
-  headers: {'interest-cohort'}
+  headers: {}
 };
 
 axios(config)
