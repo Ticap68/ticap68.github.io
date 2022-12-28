@@ -31,6 +31,7 @@ axios(config)
   .then(function (response) {
     console.log(JSON.stringify(response.data));
     console.log(response.data.results[0].elevation);
+    document.getElementById('altitude').innerHTML = data.elevation;
   })
   .catch(function (error) {
     console.log(error);
