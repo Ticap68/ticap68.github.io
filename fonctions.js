@@ -1,4 +1,4 @@
-//const Key = 'AIzaSyA8A69egVsPgDDrAXVWXdtW_HrpKLvmiOM';
+//const Key = 'AIzaSyA8A69egVsPgDDrAXVWXdtW_HrpKLvmiO';
 
 function getAltitudeGpxz() {
   fetch('https://gpxz.com/api/elevation?lat=48.856614&lon=2.3522219000000177')
