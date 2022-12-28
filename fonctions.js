@@ -25,5 +25,7 @@ axios(config)
 
 map.on('click', function(e) {
   var coord = e.latlng.lat + ", " + e.latlng.lng;
-  console.log("Lat, Lon : " + e.latlng.lat + ", " + e.latlng.lng)
+  // console.log("Lat, Lon : " + e.latlng.lat + ", " + e.latlng.lng)
+  console.log(e.latlng)
+  document.getElementById('lat').innerHTML = "Lat, Lon : " + e.latlng.lat + ", " + e.latlng.lng;
 });
