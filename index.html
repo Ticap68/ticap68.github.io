@@ -5,10 +5,32 @@
   <title>Altitude de Paris</title>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="fonctions.js"></script>
-  
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+    integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+    integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+
+  <style>
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+    }
+
+    .leaflet-container {
+      height: 400px;
+      width: 600px;
+      max-width: 100%;
+      max-height: 100%;
+    }
+  </style>
+
+
 </head>
 
 <body>
+  <div id="map" style="width: 600px; height: 400px;"></div>
   <p>L'altitude de Paris est de: <span id="altitude"></span> </p>
 </body>
 
