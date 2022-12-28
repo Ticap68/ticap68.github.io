@@ -8,28 +8,24 @@ const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 
 
-
-
-
-var config = {
-  method: 'get',
-  url: 'https://api.open-elevation.com/api/v1/lookup?locations=' + coord,
-  headers: {}
-};
-
-axios(config)
-  .then(function (response) {
-    console.log(JSON.stringify(response.data));
-    console.log(response.data.results[0].elevation);
-    document.getElementById('altitude').innerHTML = response.data.results[0].elevation;
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
-
-
 map.on('click', function (e) {
   var coord = e.latlng.lat + "," + e.latlng.lng;
   document.getElementById('lat').innerHTML = coord;
-  config.url = 'https://api.open-elevation.com/api/v1/lookup?locations=' + coord;
+
+  var config = {
+    method: 'get',
+    url: 'https://api.open-elevation.com/api/v1/lookup?locations=' + coord,
+    headers: {}
+  };
+
+  axios(config)
+    .then(function (response) {
+      console.log(JSON.stringify(response.data));
+      console.log(response.data.results[0].elevation);
+      document.getElementById('altitude').innerHTML = response.data.results[0].elevation;
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
 });
