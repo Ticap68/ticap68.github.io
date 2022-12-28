@@ -21,12 +21,9 @@ axios(config)
     console.log(error);
   });
 
-map.on('click', function (event) {
-  var lat = event.latLng.lat();
-  //var lng = event.latLng.lng();
-  //document.getElementById('lat').innerHTML = lat;
-});
+
 
 map.on('click', function(e) {
-  alert("Lat, Lon : " + e.latlng.lat + ", " + e.latlng.lng)
+  var coord = e.latlng.lat + ", " + e.latlng.lng;
+  console.log("Lat, Lon : " + e.latlng.lat + ", " + e.latlng.lng)
 });
