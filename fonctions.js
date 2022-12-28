@@ -23,6 +23,10 @@ axios(config)
 
 map.on('click', function (event) {
   var lat = event.latLng.lat();
-  var lng = event.latLng.lng();
-  document.getElementById('lat').innerHTML = lat;
+  //var lng = event.latLng.lng();
+  //document.getElementById('lat').innerHTML = lat;
+});
+
+map.on('click', function(e) {
+  alert("Lat, Lon : " + e.latlng.lat + ", " + e.latlng.lng)
 });
