@@ -21,4 +21,3 @@ axios(config)
     console.log(error);
   });
 
-  
