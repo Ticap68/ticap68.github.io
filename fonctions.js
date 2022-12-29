@@ -32,7 +32,7 @@ const valueDisplay = document.getElementById('resultat');
 
 numberInput.addEventListener('input', () => {
   let number = Number(numberInput.value);
-  number = number * 2;
+  number = (number * 1000) / 3600;
   valueDisplay.textContent = number;
 });
 
