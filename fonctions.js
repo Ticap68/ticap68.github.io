@@ -34,6 +34,7 @@ const numberInput = document.getElementById('number-input');
 const valueDisplay = document.getElementById('resultat');
 
 numberInput.addEventListener('input', () => {
-  const { value } = numberInput;
-  valueDisplay.textContent = `Valeur : ${value}`;
+  var number = numberInput;
+  number = number + 10;
+  valueDisplay.textContent = number;
 });
