@@ -1,4 +1,5 @@
 const map = L.map('map').setView([51.505, -0.09], 13);
+
 const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
   maxZoom: 19,
   attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
@@ -16,8 +17,8 @@ map.on('click', function (e) {
 
   axios(config)
     .then(function (response) {
-      console.log(JSON.stringify(response.data));
-      console.log(response.data.results[0].elevation);
+      // console.log(JSON.stringify(response.data));
+      // console.log(response.data.results[0].elevation);
       document.getElementById('altitude').innerHTML = response.data.results[0].elevation;
     })
     .catch(function (error) {
@@ -31,7 +32,7 @@ const valueDisplay = document.getElementById('resultat');
 
 numberInput.addEventListener('input', () => {
   let number = numberInput.value;
-  number += 5;
+  number += 10;
   valueDisplay.textContent = number;
 });
 
