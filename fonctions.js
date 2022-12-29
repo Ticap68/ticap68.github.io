@@ -30,7 +30,7 @@ const numberInput = document.getElementById('number-input');
 const valueDisplay = document.getElementById('resultat');
 
 numberInput.addEventListener('input', () => {
-  var number = numberInput;
-  number = number + 10;
+  var number = numberInput.value;
+  number += number;
   valueDisplay.textContent = number;
 });
