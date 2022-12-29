@@ -31,6 +31,6 @@ const valueDisplay = document.getElementById('resultat');
 
 numberInput.addEventListener('input', () => {
   var number = numberInput.value;
-  number += number;
+  number += 10;
   valueDisplay.textContent = number;
 });
