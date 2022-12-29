@@ -10,7 +10,7 @@ const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 map.on('click', function (e) {
   var coord = e.latlng.lat + "," + e.latlng.lng;
-  document.getElementById('lat').innerHTML = coord;
+  document.getElementById('latlng').innerHTML = coord;
 
   var config = {
     method: 'get',
@@ -28,4 +28,9 @@ map.on('click', function (e) {
       console.log(error);
     });
 
+});
+
+const numberInput = document.getElementById('number-input');
+numberInput.addEventListener('input', function() {
+  document.getElementById('resultat').innerHTML = numberInput.value + 10;
 });
