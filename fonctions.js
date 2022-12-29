@@ -31,6 +31,9 @@ map.on('click', function (e) {
 });
 
 const numberInput = document.getElementById('number-input');
-numberInput.addEventListener('input', function() {
-  document.getElementById('resultat').innerHTML = numberInput.value + 10;
+const valueDisplay = document.getElementById('resultat');
+
+numberInput.addEventListener('input', () => {
+  const { value } = numberInput;
+  valueDisplay.textContent = `Valeur : ${value}`;
 });
