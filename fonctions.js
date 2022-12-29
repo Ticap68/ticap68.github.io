@@ -32,7 +32,7 @@ const valueDisplay = document.getElementById('resultat');
 
 numberInput.addEventListener('input', () => {
   let number = Number(numberInput.value);
-  number += 10;
+  number = number * 2;
   valueDisplay.textContent = number;
 });
 
