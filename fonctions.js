@@ -21,7 +21,7 @@ map.on('click', function (e) {
 
   var config = {
     method: 'get',
-    url: 'https://api.open-elevation.com/api/v1/lookup?locations=' + e.latlng.lat + ',' + e.latlng.lng,
+    url: 'https://api.open-elevation.com/api/v1/lookup?locations=' + markerA.getLatLng().lat + ',' + markerA.getLatLng().lng,
     headers: {}
   };
 
