@@ -6,18 +6,19 @@ const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 
 
-function addMarker(coord) {
-  var marker = L.marker(coord).addTo(map);
-}
+
+  var markerA = null;
+  var markerB = null;
 
 
 
 map.on('click', function (e) {
   var coord = e.latlng;
-  document.getElementById('latlng').innerHTML = coord;
+  
 
-  addMarker(e.latlng);
-
+  markerA = L.marker(e.latlng).addTo(map);
+  document.getElementById('latlng').innerHTML = markerA;
+  
   var config = {
     method: 'get',
     url: 'https://api.open-elevation.com/api/v1/lookup?locations=' + coord.lat + ',' + coord.lng,
