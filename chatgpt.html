@@ -106,6 +106,8 @@
       map.invalidateSize();
       map.fitBounds(markerA.getLatLng(), markerB.getLatLng());
     });
+
+
     function updateAltitude(marker, elementId) {
       var config = {
         method: 'get',
@@ -121,13 +123,20 @@
           console.log(error);
         });
     }
-    markerA.on('dragend', function () {
-      updateAltitude(markerA, 'altitude-a');
-    });
 
-    markerB.on('dragend', function () {
-      updateAltitude(markerB, 'altitude-b');
-    });
+    if (markerA != null) {
+      markerA.on('dragend', function () {
+        updateAltitude(markerA, 'altitude-a');
+      });
+    }
+
+    if (markerB != null) {
+      markerB.on('dragend', function () {
+        updateAltitude(markerB, 'altitude-b');
+      });
+    }
+
+
 
   </script>
 </body>
