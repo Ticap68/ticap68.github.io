@@ -17,7 +17,7 @@ map.on('click', function (e) {
 
   if (markerA == null) { markerA = L.marker(e.latlng).addTo(map); }
 
-  document.getElementById('latlng').innerHTML = markerA;
+  document.getElementById('latlng').innerHTML = markerA.getLatLng();
 
   var config = {
     method: 'get',
