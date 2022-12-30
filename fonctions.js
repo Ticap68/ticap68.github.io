@@ -34,7 +34,7 @@ calculatorForm.addEventListener('submit', event => {
   event.preventDefault();
   const vitesse = Number(document.getElementById('vitesse').value);
   const tauxChute = Number(document.getElementById('tauxChute').value);
-  const result = vitesse * tauxChute;
+  const result = (vitesse*1000/3600)/tauxChute;
   resultat.textContent = `Résultat : ${result}`;
 });
 
