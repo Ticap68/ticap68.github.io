@@ -20,7 +20,7 @@ map.on('click', function (e) {
 
   var config = {
     method: 'get',
-    url: 'https://api.open-elevation.com/api/v1/lookup?locations=' + coord,
+    url: 'https://api.open-elevation.com/api/v1/lookup?locations=' + coord.lat + ',' + coord.lng,
     headers: {}
   };
 
