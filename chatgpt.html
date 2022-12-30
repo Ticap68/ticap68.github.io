@@ -98,8 +98,11 @@
     }
 
     // Appeler la fonction updateDistance lorsque l'un des marqueurs est déplacé
-    markerA.on('drag', updateDistance);
-    markerB.on('drag', updateDistance);
+    if (markerA != null && markerB != null) {
+      markerA.on('drag', updateDistance);
+      markerB.on('drag', updateDistance);
+    }
+
   </script>
 </body>
 
