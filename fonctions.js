@@ -1,7 +1,7 @@
 const map = L.map('map').setView([48.043, 7.156], 10);
 
 const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  maxZoom: 25,
+  maxZoom: 20,
   attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
 
@@ -27,12 +27,14 @@ map.on('click', function (e) {
 
 });
 
-const numberInput = document.getElementById('number-input');
-const valueDisplay = document.getElementById('resultat');
+const calculatorForm = document.getElementById('calculator-form');
+const resultat = document.getElementById('resultat');
 
-numberInput.addEventListener('input', () => {
-  let number = Number(numberInput.value);
-  number = (number * 1000) / 3600;
-  valueDisplay.textContent = number;
+calculatorForm.addEventListener('submit', event => {
+  event.preventDefault();
+  const vitesse = Number(document.getElementById('vitesse').value);
+  const tauxChute = Number(document.getElementById('tauxChute').value);
+  const result = vitesse * tauxChute;
+  resultat.textContent = `Résultat : ${result}`;
 });
 
