@@ -71,6 +71,10 @@
       axios(config)
         .then(function (response) {
           document.getElementById(elementId).innerHTML = response.data.results[0].elevation.toFixed(1) + ' m';
+          if (markerA != null && markerB != null) {
+            let distance = markerA.getLatLng().distanceTo(markerB.getLatLng()).toFixed(1);
+            document.getElementById('latlng-a').innerHTML = distance + ' m';
+          }
         })
         .catch(function (error) {
           console.log(error);
