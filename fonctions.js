@@ -16,7 +16,7 @@ map.on('click', function (e) {
 
 
   if (markerA == null) {
-    markerA = L.marker(e.latlng, { draggable });
+    markerA = L.marker(e.latlng, { draggable: true });
     markerA.addTo(map);
   }
 
