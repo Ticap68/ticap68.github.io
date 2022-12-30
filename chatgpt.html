@@ -8,6 +8,40 @@
     integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
   <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
     integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+
+  <style>
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+    }
+
+    .leaflet-container {
+      height: 600px;
+      width: 1000px;
+      max-width: 100%;
+      max-height: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="map" style="width: 1000px; height: 600px;"></div>
+  <p>
+    ALTITUDE A : <span id="altitude-a"></span> <br>
+    ALTITUDE B : <span id="altitude-b"></span> <br>
+    Distance A-B : <span id="latlng-a"></span> <br>
+    Distance A-B : <span id="latlng-b"></span> <br><br>
+  </p>
+  <form id="calculator-form">
+    <label for="vitesse">Vitesse :</label>
+    <input type="number" id="vitesse" min="0" step="0.1">
+    <br>
+    <label for="tauxChute">Taux de chute :</label>
+    <input type="number" id="tauxChute" min="0" step="0.1">
+    <br>
+    <button type="submit">Calculer</button>
+  </form>
   <button type="button" id="refresh-button">Actualiser l'altitude</button>
 
   <script>
@@ -55,7 +89,16 @@
       getAltitude(markerB, 'altitude-b');
     });
 
-    const distance = markerA.getLatLng().distanceTo(markerB.getLatLng());
-    document.getElementById('latlng-a').innerHTML = distance + ' mètres';
-    document.getElementById('latlng-b').innerHTML = distance + ' mètres';
+    function updateDistance() {
+      const distance = markerA.getLatLng().distanceTo(markerB.getLatLng());
+      document.getElementById('latlng-a').innerHTML = distance + ' mètres';
+      document.getElementById('latlng-b').innerHTML = distance + ' mètres';
+    }
+
+    // Appeler la fonction updateDistance lorsque l'un des marqueurs est déplacé
+    markerA.on('drag', updateDistance);
+    markerB.on('drag', updateDistance);
   </script>
+</body>
+
+</html>
