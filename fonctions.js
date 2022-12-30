@@ -7,21 +7,21 @@ const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 
 
-  var markerA = null;
-  var markerB = null;
-
+var markerA = null;
+var markerB = null;
+var marker = new L.Marker([]);
 
 
 map.on('click', function (e) {
-  var coord = e.latlng;
-  
 
-  markerA = L.marker(e.latlng).addTo(map);
+
+  if (markerA = null) { markerA = L.marker(e.latlng).addTo(map); }
+
   document.getElementById('latlng').innerHTML = markerA;
-  
+
   var config = {
     method: 'get',
-    url: 'https://api.open-elevation.com/api/v1/lookup?locations=' + coord.lat + ',' + coord.lng,
+    url: 'https://api.open-elevation.com/api/v1/lookup?locations=' + e.latlng.lat + ',' + e.latlng.lng,
     headers: {}
   };
 
