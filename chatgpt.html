@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html>
+<meta charset="utf-8">
+<link rel="stylesheet" href="style.css">
 
 <head>
   <title>Altitude - Finesse</title>
@@ -31,8 +33,8 @@
     ALTITUDE A : <span id="altitude-a"></span> <br>
     ALTITUDE B : <span id="altitude-b"></span> <br>
     Distance A-B : <span id="latlng-a"></span> <br>
-    Distance A-B : <span id="latlng-b"></span> <br><br>
-  </p>
+
+    <button type="button" id="refresh-button">Actualiser l'altitude</button>
   <form id="calculator-form">
     <label for="vitesse">Vitesse :</label>
     <input type="number" id="vitesse" min="0" step="0.1">
@@ -42,7 +44,7 @@
     <br>
     <button type="submit">Calculer</button>
   </form>
-  <button type="button" id="refresh-button">Actualiser l'altitude</button>
+  </p>
 
   <script>
     const map = L.map('map').setView([48.043, 7.156], 10);
