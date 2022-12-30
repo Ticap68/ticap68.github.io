@@ -5,9 +5,18 @@ const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
 
+
+function addMarker(coord) {
+  var marker = L.marker(coord).addTo(map);
+}
+
+
+
 map.on('click', function (e) {
-  var coord = e.latlng.lat + "," + e.latlng.lng;
+  var coord = e.latlng;
   document.getElementById('latlng').innerHTML = coord;
+
+  addMarker(e.latlng);
 
   var config = {
     method: 'get',
@@ -27,6 +36,10 @@ map.on('click', function (e) {
 
 });
 
+
+
+
+
 const calculatorForm = document.getElementById('calculator-form');
 const resultat = document.getElementById('resultat');
 
@@ -34,7 +47,7 @@ calculatorForm.addEventListener('submit', event => {
   event.preventDefault();
   const vitesse = Number(document.getElementById('vitesse').value);
   const tauxChute = Number(document.getElementById('tauxChute').value);
-  const result = (vitesse*1000/3600)/tauxChute;
+  const result = (vitesse * 1000 / 3600) / tauxChute;
   resultat.textContent = `Résultat : ${result}`;
 });
 
