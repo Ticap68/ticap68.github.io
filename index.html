@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html>
+<meta charset="utf-8">
+<!-- <link rel="stylesheet" href="style.css">  -->
 
 <head>
   <title>Altitude - Finesse</title>
@@ -8,8 +10,6 @@
     integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
   <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
     integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
-
-
   <style>
     html,
     body {
@@ -27,13 +27,12 @@
 </head>
 
 <body>
-
   <div id="map" style="width: 1000px; height: 600px;"></div>
-
   <p>
-    ALTITUDE : <span id="altitude"></span> <br>
-    Coordonnées : <span id="latlng"></span> <br><br>
-  </p>
+    ALTITUDE A : <span id="altitude-a"></span> <br>
+    ALTITUDE B : <span id="altitude-b"></span> <br>
+    Distance A-B : <span id="latlng-a"></span> <br>
+    <button type="button" id="refresh-button">Actualiser l'altitude</button>
 
   <form id="calculator-form">
     <label for="vitesse">Vitesse :</label>
@@ -45,10 +44,68 @@
     <button type="submit">Calculer</button>
   </form>
 
-  <p id="resultat">Finesse : </p>
+  <span id="result"></span>
+  </p>
 
+  <script>
+    const map = L.map('map').setView([48.043, 7.156], 10);
+    const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 20,
+      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+    let markerA = null;
+    let markerB = null;
+
+    async function getAltitude(marker, elementId) {
+      var config = {
+        method: 'get',
+        url: 'https://api.open-elevation.com/api/v1/lookup?locations=' + marker.getLatLng().lat + ',' + marker.getLatLng().lng,
+        headers: {}
+      };
+
+      try {
+        const response = await axios(config);
+        const altitude = response.data.results[0].elevation.toFixed(1);
+        document.getElementById(elementId).innerHTML = altitude + ' m';
+        return altitude;
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+
+    function getDistance() {
+      let distance = markerA.getLatLng().distanceTo(markerB.getLatLng());
+      // distance = markerA.getLatLng().distanceTo(markerB.getLatLng()).toFixed(1);
+      return distance
+    }
+
+    map.on('click', function (e) {
+      if (markerA == null) {
+        markerA = L.marker(e.latlng, { draggable: true });
+        markerA.addTo(map);
+      } else if (markerB == null) {
+        markerB = L.marker(e.latlng, { draggable: true });
+        markerB.addTo(map);
+      }
+      getAltitude(markerA, 'altitude-a');
+      getAltitude(markerB, 'altitude-b');
+      //markerA.on('drag', getDistance);
+      document.getElementById('latlng-a').innerHTML = getDistance();
+    }
+    );
+
+    const calculatorForm = document.getElementById('calculator-form');
+    const resultat = document.getElementById('resultat');
+    calculatorForm.addEventListener('submit', event => {
+      event.preventDefault();
+      const vitesse = Number(document.getElementById('vitesse').value);
+      const tauxChute = Number(document.getElementById('tauxChute').value);
+      const result = (vitesse * 1000 / 3600) / tauxChute;
+      resultat.textContent = `Résultat : ${result}`;
+    });
+
+  </script>
 </body>
-
-<script src="fonctions.js"></script>
 
 </html>
