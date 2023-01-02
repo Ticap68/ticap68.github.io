@@ -83,18 +83,16 @@
       if (markerA == null) {
         markerA = L.marker(e.latlng, { draggable: true });
         markerA.addTo(map);
-        getAltitude(markerA, 'altitude-a');
       } else if (markerB == null) {
         markerB = L.marker(e.latlng, { draggable: true });
         markerB.addTo(map);
-        getAltitude(markerB, 'altitude-b');
       }
-
-      if (markerA != null && markerB != null) {
-        markerA.on('drag', getDistance, getAltitude);
-        markerB.on('drag', getDistance, getAltitude);
-      }
-    });
+      getAltitude(markerA, 'altitude-a');
+      getAltitude(markerB, 'altitude-b');
+      markerA.on('drag', getDistance);
+      markerB.on('drag', getDistance);
+    }
+    );
 
 
 
