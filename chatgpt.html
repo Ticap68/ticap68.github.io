@@ -89,12 +89,14 @@
         markerB.addTo(map);
         getAltitude(markerB, 'altitude-b');
       }
+
+      if (markerA != null && markerB != null) {
+        markerA.on('drag', getDistance, getAltitude);
+        markerB.on('drag', getDistance, getAltitude);
+      }
     });
 
-    if (markerA != null && markerB != null) {
-      markerA.on('drag', getDistance, getAltitude);
-      markerB.on('drag', getDistance, getAltitude);
-    }
+
 
   </script>
 </body>
