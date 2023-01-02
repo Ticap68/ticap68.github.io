@@ -43,6 +43,7 @@
     <br>
     <button type="submit">Calculer</button>
   </form>
+
   <script>
     const map = L.map('map').setView([48.043, 7.156], 10);
     const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -51,6 +52,33 @@
     }).addTo(map);
     let markerA = null;
     let markerB = null;
+
+    function getAltitude(marker, elementId) {
+      var config = {
+        method: 'get',
+        url: 'https://api.open-elevation.com/api/v1/lookup?locations=' + marker.getLatLng().lat + ',' + marker.getLatLng().lng,
+        headers: {}
+      };
+      let altitude;
+      axios(config)
+        .then(function (response) {
+          altitude = response.data.results[0].elevation.toFixed(1);
+          document.getElementById(elementId).innerHTML = altitude + ' m';
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      return altitude
+    }
+
+    function getDistance() {
+      let distance = markerA.getLatLng().distanceTo(markerB.getLatLng());
+      // distance = markerA.getLatLng().distanceTo(markerB.getLatLng()).toFixed(1);
+      document.getElementById('latlng-a').innerHTML = distance + ' mètres';
+      document.getElementById('latlng-b').innerHTML = distance + ' mètres';
+      return distance
+    }
+
     map.on('click', function (e) {
       if (markerA == null) {
         markerA = L.marker(e.latlng, { draggable: true });
@@ -62,41 +90,10 @@
         getAltitude(markerB, 'altitude-b');
       }
     });
-    function getAltitude(marker, elementId) {
-      var config = {
-        method: 'get',
-        url: 'https://api.open-elevation.com/api/v1/lookup?locations=' + marker.getLatLng().lat + ',' + marker.getLatLng().lng,
-        headers: {}
-      };
-      axios(config)
-        .then(function (response) {
-          document.getElementById(elementId).innerHTML = response.data.results[0].elevation.toFixed(1) + ' m';
-          if (markerA != null && markerB != null) {
-            let distance = markerA.getLatLng().distanceTo(markerB.getLatLng()).toFixed(1);
-            document.getElementById('latlng-a').innerHTML = distance + ' m';
-          }
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    }
-    document.getElementById('refresh-button').addEventListener('click', function () {
-      // Appeler la fonction getAltitude pour actualiser l'altitude
-      getAltitude(markerA, 'altitude-a');
-      getAltitude(markerB, 'altitude-b');
-    });
-    function updateDistance() {
-      const distance = markerA.getLatLng().distanceTo(markerB.getLatLng());
-      document.getElementById('latlng-a').innerHTML = distance + ' mètres';
-      document.getElementById('latlng-b').innerHTML = distance + ' mètres';
-    }
 
-    // Appeler la fonction updateDistance lorsque l'un des marqueurs est déplacé
     if (markerA != null && markerB != null) {
-      markerA.on('drag', updateDistance);
-      markerB.on('drag', updateDistance);
-      let distance = markerA.getLatLng().distanceTo(markerB.getLatLng()).toFixed(1);
-      document.getElementById('latlng-a').innerHTML = distance + ' m';
+      markerA.on('drag', getDistance, getAltitude);
+      markerB.on('drag', getDistance, getAltitude);
     }
 
   </script>
