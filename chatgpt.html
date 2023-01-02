@@ -74,8 +74,6 @@
     function getDistance() {
       let distance = markerA.getLatLng().distanceTo(markerB.getLatLng());
       // distance = markerA.getLatLng().distanceTo(markerB.getLatLng()).toFixed(1);
-      
-      
       return distance
     }
 
@@ -90,12 +88,19 @@
       getAltitude(markerA, 'altitude-a');
       getAltitude(markerB, 'altitude-b');
       //markerA.on('drag', getDistance);
-      //markerB.on('drag', getDistance);
-      document.getElementById('latlng-a').innerHTML = getDistance() ;
+      document.getElementById('latlng-a').innerHTML = getDistance();
     }
     );
 
-
+    const calculatorForm = document.getElementById('calculator-form');
+    const resultat = document.getElementById('resultat');
+    calculatorForm.addEventListener('submit', event => {
+      event.preventDefault();
+      const vitesse = Number(document.getElementById('vitesse').value);
+      const tauxChute = Number(document.getElementById('tauxChute').value);
+      const result = (vitesse * 1000 / 3600) / tauxChute;
+      resultat.textContent = `Résultat : ${result}`;
+    });
 
   </script>
 </body>
