@@ -32,7 +32,6 @@
     ALTITUDE A : <span id="altitude-a"></span> <br>
     ALTITUDE B : <span id="altitude-b"></span> <br>
     Distance A-B : <span id="latlng-a"></span> <br>
-    <button type="button" id="refresh-button">Actualiser l'altitude</button>
 
   <form id="calculator-form">
     <label for="vitesse">Vitesse :</label>
@@ -44,7 +43,7 @@
     <button type="submit">Calculer</button>
   </form>
 
-  <span id="result"></span>
+  <span id="resultat"></span>
   </p>
 
   <script>
@@ -62,7 +61,6 @@
         url: 'https://api.open-elevation.com/api/v1/lookup?locations=' + marker.getLatLng().lat + ',' + marker.getLatLng().lng,
         headers: {}
       };
-
       try {
         const response = await axios(config);
         const altitude = response.data.results[0].elevation.toFixed(1);
@@ -73,10 +71,8 @@
       }
     }
 
-
     function getDistance() {
       let distance = markerA.getLatLng().distanceTo(markerB.getLatLng());
-      // distance = markerA.getLatLng().distanceTo(markerB.getLatLng()).toFixed(1);
       return distance
     }
 
