@@ -1,28 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Altitude of Colmar, France</title>
+  <title>Altitude de Colmar, France</title>
 </head>
 <body>
   <div id="altitude"></div>
   <script>
-    var lat = 48.0833;
-    var lng = 7.3667;
+    async function getAltitude(lat, lng) {
+      var response = await fetch('https://api.open-elevation.com/api/v1/lookup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          'locations': [{'latitude': lat, 'longitude': lng}]
+        })
+      });
+      var data = await response.json();
+      return data.results[0].elevation;
+    }
 
-    fetch('https://api.open-elevation.com/api/v1/lookup', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        'locations': [{'latitude': lat, 'longitude': lng}]
-      })
-    }).then(function(response) {
-      return response.json();
-    }).then(function(data) {
-      var altitude = data.results[0].elevation;
-      document.getElementById('altitude').innerHTML = 'Altitude of Colmar, France: ' + altitude + ' meters';
-    });
+    var altitude = getAltitude(48.0833, 7.3667);
+    document.getElementById('altitude').innerHTML = 'Altitude de Colmar, France: ' + altitude + ' mètres';
   </script>
 </body>
 </html>
