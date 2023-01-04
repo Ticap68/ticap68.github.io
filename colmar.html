@@ -6,13 +6,9 @@
 </head>
 
 <body>
-
-
     <p>ALTITUDE A : <span id="altitude"></span> </p>
-
-
     <script>
-        async function getAltitude(lat, lng) {
+        function getAltitude(lat, lng) {
             var response = await fetch('https://api.open-elevation.com/api/v1/lookup', {
                 method: 'POST',
                 headers: {
@@ -22,7 +18,7 @@
                     'locations': [{ 'latitude': lat, 'longitude': lng }]
                 })
             });
-            var data = await response.json();
+            var data =  response.json();
             return data.results[0].elevation;
         }
 
