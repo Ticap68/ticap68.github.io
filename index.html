@@ -61,14 +61,14 @@
         url: 'https://api.open-elevation.com/api/v1/lookup?locations=' + marker.getLatLng().lat + ',' + marker.getLatLng().lng,
         headers: {}
       };
+      const altitude
       try {
         const response = await axios(config);
-        const altitude = response.data.results[0].elevation.toFixed(1);
-
-        return altitude;
+        altitude = response.data.results[0].elevation.toFixed(1);
       } catch (error) {
         console.log(error);
       }
+      return altitude;
     }
 
     function getDistance() {
