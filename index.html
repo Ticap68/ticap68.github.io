@@ -61,7 +61,7 @@
         url: 'https://api.open-elevation.com/api/v1/lookup?locations=' + marker.getLatLng().lat + ',' + marker.getLatLng().lng,
         headers: {}
       };
-      const altitude=0;
+      const altitude = 0;
       try {
         const response = await axios(config);
         altitude = response.data.results[0].elevation.toFixed(1);
@@ -83,11 +83,11 @@
       } else if (markerB == null) {
         markerB = L.marker(e.latlng, { draggable: true });
         markerB.addTo(map);
+      } else {
+        document.getElementById('altitude-a').innerHTML = getAltitude(markerA);
+        document.getElementById('altitude-b').innerHTML = getAltitude(markerB);
+        document.getElementById('latlng-a').innerHTML = getDistance();
       }
-
-      document.getElementById('altitude-a').innerHTML = getAltitude(markerA);
-      document.getElementById('altitude-b').innerHTML = getAltitude(markerB);
-      document.getElementById('latlng-a').innerHTML = getDistance();
     }
     );
 
