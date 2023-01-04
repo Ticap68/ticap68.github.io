@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Altitude of Colmar, France</title>
+</head>
+<body>
+  <div id="altitude"></div>
+  <script>
+    var lat = 48.0833;
+    var lng = 7.3667;
+
+    fetch('https://api.open-elevation.com/api/v1/lookup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        'locations': [{'latitude': lat, 'longitude': lng}]
+      })
+    }).then(function(response) {
+      return response.json();
+    }).then(function(data) {
+      var altitude = data.results[0].elevation;
+      document.getElementById('altitude').innerHTML = 'Altitude of Colmar, France: ' + altitude + ' meters';
+    });
+  </script>
+</body>
+</html>
