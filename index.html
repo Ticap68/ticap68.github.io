@@ -61,7 +61,7 @@
         url: 'https://api.open-elevation.com/api/v1/lookup?locations=' + marker.getLatLng().lat + ',' + marker.getLatLng().lng,
         headers: {}
       };
-      const altitude
+      const altitude=0;
       try {
         const response = await axios(config);
         altitude = response.data.results[0].elevation.toFixed(1);
