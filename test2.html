@@ -61,21 +61,16 @@
     let markerA = null;
     let markerB = null;
 
-    function getAltitude(marker) {
-      return $.ajax({
-        method: 'GET',
-        url: 'https://api.open-elevation.com/api/v1/lookup?locations=' + marker.getLatLng().lat + ',' + marker.getLatLng().lng,
-      }).then(function (response) {
-        if (response.data.results) {
-          return response.data.results[0].elevation.toFixed(1);
-        } else {
-          console.error('Error: response.data.results is undefined');
-          return 0;
-        }
-      }).fail(function (error) {
-        console.error('Error:', error);
-        return 0;
-      });
+    async function getAltitude(marker) {
+      try {
+        const response = await fetch('https://api.open-elevation.com/api/v1/lookup?locations=' + marker.getLatLng().lat + ',' + marker.getLatLng().lng, {
+          method: 'GET'
+        });
+        const data = await response.json();
+        return data.results[0].elevation;
+      } catch (error) {
+        console.error(error);
+      }
     }
 
 
