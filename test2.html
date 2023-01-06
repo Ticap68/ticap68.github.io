@@ -62,17 +62,22 @@
     let markerB = null;
 
     function getAltitude(marker) {
-      let altitude = 0;
       return $.ajax({
         method: 'GET',
         url: 'https://api.open-elevation.com/api/v1/lookup?locations=' + marker.getLatLng().lat + ',' + marker.getLatLng().lng,
       }).then(function (response) {
-        altitude = response.data.results[0].elevation.toFixed(1);
+        if (response.data.results) {
+          return response.data.results[0].elevation.toFixed(1);
+        } else {
+          console.error('Error: response.data.results is undefined');
+          return 0;
+        }
       }).fail(function (error) {
-        console.log(error);
+        console.error('Error:', error);
+        return 0;
       });
-      return altitude;
     }
+
 
     function getDistance() {
       let distance = markerA.getLatLng().distanceTo(markerB.getLatLng());
