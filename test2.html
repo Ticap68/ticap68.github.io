@@ -81,19 +81,17 @@
 
     map.on('click', function (e) {
       if (markerA == null) {
-        markerA = L.marker(e.latlng, {
-          draggable: true,
-          icon: L.divIcon({
-            html: 'Départ',
-            className: 'my-div-icon'
-          })
-        });
+        markerA = L.marker(e.latlng, { draggable: true, title: 'A' });
         markerA.addTo(map);
       } else if (markerB == null) {
-        markerB = L.marker(e.latlng, { draggable: true });
+        markerB = L.marker(e.latlng, { draggable: true, title: 'B' });
         markerB.addTo(map);
       } else {
-        document.getElementById('altitude-a').innerHTML = getAltitude(markerA);
+
+        let altMarkerA = getAltitude(markerA).then(altitude => { return altitude; });
+
+
+        document.getElementById('altitude-a').innerHTML = altMarkerA;
         document.getElementById('altitude-b').innerHTML = getAltitude(markerB);
         document.getElementById('latlng-a').innerHTML = getDistance();
       }
