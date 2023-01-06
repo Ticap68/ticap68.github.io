@@ -62,17 +62,17 @@
     let markerB = null;
 
     function getAltitude(marker) {
+      let altitude = 0;
       return $.ajax({
         method: 'GET',
         url: 'https://api.open-elevation.com/api/v1/lookup?locations=' + marker.getLatLng().lat + ',' + marker.getLatLng().lng,
       }).then(function (response) {
-        return response.data.results[0].elevation.toFixed(1);
+        altitude = response.data.results[0].elevation.toFixed(1);
       }).fail(function (error) {
         console.log(error);
       });
+      return altitude;
     }
-
-
 
     function getDistance() {
       let distance = markerA.getLatLng().distanceTo(markerB.getLatLng());
@@ -81,7 +81,13 @@
 
     map.on('click', function (e) {
       if (markerA == null) {
-        markerA = L.marker(e.latlng, { draggable: true });
+        markerA = L.marker(e.latlng, {
+          draggable: true,
+          icon: L.divIcon({
+            html: 'Départ',
+            className: 'my-div-icon'
+          })
+        });
         markerA.addTo(map);
       } else if (markerB == null) {
         markerB = L.marker(e.latlng, { draggable: true });
