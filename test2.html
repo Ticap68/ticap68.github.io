@@ -88,10 +88,10 @@
         markerB.addTo(map);
       } else {
 
-        let altMarkerA = getAltitude(markerA).then(altitude => { return altitude; });
+        getAltitude(markerA).then(altitude => {
+          document.getElementById('altitude-a').innerHTML = altitude;
+        });
 
-
-        document.getElementById('altitude-a').innerHTML = altMarkerA;
         document.getElementById('altitude-b').innerHTML = getAltitude(markerB);
         document.getElementById('latlng-a').innerHTML = getDistance();
       }
