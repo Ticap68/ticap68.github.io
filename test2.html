@@ -81,16 +81,16 @@
 
     map.on('click', function (e) {
       if (markerA == null) {
-        markerA = L.marker(e.latlng, { draggable: true }).addTo(map).bindTooltip('Mon tooltip', {
+        markerA = L.marker(e.latlng, { draggable: true }).addTo(map).bindTooltip('A', {
           permanent: true,
           direction: 'right'
         });
-
-
-
         markerA.addTo(map);
       } else if (markerB == null) {
-        markerB = L.marker(e.latlng, { draggable: true, title: 'B' });
+        markerB = L.marker(e.latlng, { draggable: true }).addTo(map).bindTooltip('B', {
+          permanent: true,
+          direction: 'right'
+        });
         markerB.addTo(map);
       } else {
 
