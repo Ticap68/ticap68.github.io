@@ -54,10 +54,18 @@
 
                 fetch('https://api.opentopodata.org/v1/eudem25m?locations=48.862,2.347', { mode: 'no-cors' })
 
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        } else {
+                            return response.json();
+                        }
+                    })
                     .then(data => {
                         let elevation = data.results[0].elevation;
-                        console.log(`Altitude: ${elevation} `);
-                    });
+                        console.log(`Altitude: ${elevation} m`);
+                    })
+                    .catch(error => console.log('There was a problem:', error));
 
 
             }
