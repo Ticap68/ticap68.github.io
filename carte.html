@@ -52,18 +52,14 @@
                 markerName += 1;
 
 
-                let lat = 48.862;
-                let lon = 2.347;
-
-                axios.get(`https://api.opentopodata.org/v1/eudem25m?locations=${lat},${lon}`)
-                    .then(response => {
-                        let elevation = response.data.elevations[0].elevation;
+                $.ajax({
+                    type: "GET",
+                    url: "https://api.opentopodata.org/v1/eudem25m?locations=48.862,2.347",
+                    success: function (res) {
+                        let elevation = res.elevations[0].elevation;
                         console.log(`Altitude: ${elevation} m`);
-                    })
-                    .catch(error => {
-                        console.error(error);
-                    });
-
+                    }
+                });
 
             }
             )
