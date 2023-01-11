@@ -22,7 +22,7 @@
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
 
-        async function getAltitude(lat, lng) {
+        async function getAltitude(marker) {
             try {
                 const response = await fetch('https://api.open-elevation.com/api/v1/lookup', {
                     method: 'POST',
@@ -40,14 +40,26 @@
             }
         }
 
-        // Get the altitude and update the marker label
-        getAltitude(48.0833, 7.3667).then(altitude => {
-            // Add a marker to the map
-            var marker = L.marker([48.0833, 7.3667]).addTo(map);
+        let markerA = null;
 
-            // Update the marker label with the altitude
-            marker.bindTooltip(`Colmar - Altitude: ${altitude}`).openTooltip();
-        });
+        map.on('click', function (e) {
+            if (markerA == null) {
+                markerA = L.marker(e.latlng, { draggable: true }).addTo(map).bindTooltip('A', {
+                    permanent: true,
+                    direction: 'right'
+                });
+                markerA.addTo(map);
+            }
+
+            getAltitude(48.0833, 7.3667).then(altitude => {
+
+                let a = ${altitude};
+                document.getElementById('altitude').innerHTML = 
+            });
+        })
+
+
+
 
     </script>
 </body>
