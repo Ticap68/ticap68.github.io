@@ -8,7 +8,6 @@
         crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
         integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
-    <script src="https://cdn.jsdelivr.net/npm/leaflet.easybutton@2/src/easy-button.js"></script>
 </head>
 
 <body>
@@ -25,6 +24,11 @@
 
     <p>ALTITUDE A : <span id="altitude"></span> </p>
 
+    <!-- bouton pour ajouter un marqueur -->
+    <button id="add-marker-button">Add marker</button>
+
+    <!-- bouton pour supprimer les marqueurs -->
+    <button id="remove-marker-button">Remove marker</button>
 
     <script>
         //Variable pour la couche de marqueurs
@@ -34,36 +38,25 @@
         //Variable pour le nom des marqueurs
         var markerName = 1;
 
-        //Ajout du bouton pour ajouter des marqueurs
-        var addButton = L.easyButton({
-            states: [{
-                stateName: 'add-marker',
-                icon: 'fa-plus',
-                title: 'Add marker',
-                onClick: function (btn, map) {
-                    //Ajout de l'event de click pour ajouter un marqueur
-                    map.on('click', function (e) {
-                        var marker = L.marker(e.latlng).addTo(markers);
-                        marker.bindPopup(markerName.toString());
-                        markerName += 1;
-                    });
-                    btn.state('remove-marker');
-                }
-            }, {
-                stateName: 'remove-marker',
-                icon: 'fa-minus',
-                title: 'Remove marker',
-                onClick: function (btn, map) {
-                    //Suppression de l'event de click pour ajouter un marqueur
-                    map.off('click');
-                    markers.clearLayers();
-                    markerName = 1;
-                    btn.state('add-marker');
-                }
-            }]
-        });
-        addButton.addTo(map);
+        //Référence aux boutons HTML
+        var addMarkerButton = document.getElementById('add-marker-button');
+        var removeMarkerButton = document.getElementById('remove-marker-button');
 
+        //Ajout de l'event de click pour ajouter un marqueur
+        addMarkerButton.addEventListener('click', function () {
+            map.on('click', function (e) {
+                var marker = L.marker(e.latlng).addTo(markers);
+                marker.bindPopup(markerName.toString());
+                markerName += 1;
+            });
+        });
+
+        //Suppression de l'event de click pour ajouter un marqueur
+        removeMarkerButton.addEventListener('click', function () {
+            map.off('click');
+            markers.clearLayers();
+            markerName = 1;
+        });
 
 
     </script>
