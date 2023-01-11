@@ -55,7 +55,7 @@
 
                 async function getElevation() {
                     let url = `https://api.opentopodata.org/v1/eudem25m?locations=48.862,2.347`;
-                    let response = await fetch(url);
+                    let response = await fetch(url,{mode:"no-cors"});
                     let data = await response.json();
                     let elevation = data.results[0].elevation;
                     console.log(`Altitude: ${elevation} m`);
