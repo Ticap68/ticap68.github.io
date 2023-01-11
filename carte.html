@@ -50,7 +50,7 @@
                 markerName += 1;
 
 
-                fetch(`'https://api.opentopodata.org/v1/eudem25m?locations=' + e.latlng.lat + ',' + e.latlng.ln`)
+                fetch('https://api.opentopodata.org/v1/eudem25m?locations=' + e.latlng.lat + ',' + e.latlng.ln)
                     .then(response => response.json())
                     .then(data => {
                         let elevation = data.elevations[0].elevation;
