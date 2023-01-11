@@ -8,8 +8,7 @@
         crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
         integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </head>
 
 <body>
@@ -53,14 +52,13 @@
                 markerName += 1;
 
 
-                $.ajax({
-                    type: "GET",
-                    url: "https://api.opentopodata.org/v1/eudem25m?locations=48.862,2.347",
-                    success: function (res) {
-                        let elevation = res.elevations[0].elevation;
+                fetch('https://api.opentopodata.org/v1/eudem25m?locations=48.862,2.347', { mode: 'no-cors' })
+                    .then(res => res.text())
+                    .then(data => {
+                        let elevation = JSON.parse(data).elevations[0].elevation;
                         console.log(`Altitude: ${elevation} m`);
-                    }
-                });
+                    });
+
 
             }
             )
