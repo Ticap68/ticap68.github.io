@@ -25,12 +25,48 @@
     <p>ALTITUDE A : <span id="altitude"></span> </p>
 
 
+    <script>
+        //Variable pour la couche de marqueurs
+        var markers = new L.FeatureGroup();
+        map.addLayer(markers);
+
+        //Variable pour le nom des marqueurs
+        var markerName = 1;
+
+        //Ajout du bouton pour ajouter des marqueurs
+        var addButton = L.easyButton({
+            states: [{
+                stateName: 'add-marker',
+                icon: 'fa-plus',
+                title: 'Add marker',
+                onClick: function (btn, map) {
+                    //Ajout de l'event de click pour ajouter un marqueur
+                    map.on('click', function (e) {
+                        var marker = L.marker(e.latlng).addTo(markers);
+                        marker.bindPopup(markerName.toString());
+                        markerName += 1;
+                    });
+                    btn.state('remove-marker');
+                }
+            }, {
+                stateName: 'remove-marker',
+                icon: 'fa-minus',
+                title: 'Remove marker',
+                onClick: function (btn, map) {
+                    //Suppression de l'event de click pour ajouter un marqueur
+                    map.off('click');
+                    markers.clearLayers();
+                    markerName = 1;
+                    btn.state('add-marker');
+                }
+            }]
+        });
+        addButton.addTo(map);
 
 
 
+    </script>
 
-
-    
 
 
 </body>
