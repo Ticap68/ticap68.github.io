@@ -55,6 +55,7 @@
                     if (xhr.status === 200) {
                         var data = JSON.parse(xhr.responseText);
                         var altitude = data.results[0].elevation;
+                        console.log(altitude);
                         marker.bindPopup(markerName.toString() + "<br> Altitude : " + altitude + "m");
                     }
                 };
