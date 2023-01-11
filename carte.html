@@ -48,6 +48,17 @@
                 var marker = L.marker(e.latlng).addTo(markers);
                 marker.bindPopup(markerName.toString());
                 markerName += 1;
+
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', 'https://api.open-elevation.com/api/v1/lookup?locations=' + e.latlng.lat + ',' + e.latlng.lng);
+                xhr.onload = function () {
+                    if (xhr.status === 200) {
+                        var data = JSON.parse(xhr.responseText);
+                        var altitude = data.results[0].elevation;
+                        marker.bindPopup(markerName.toString() + "<br> Altitude : " + altitude + "m");
+                    }
+                };
+                xhr.send();
             });
         });
 
