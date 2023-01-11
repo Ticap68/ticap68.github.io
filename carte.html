@@ -49,17 +49,14 @@
                 marker.bindPopup(markerName.toString());
                 markerName += 1;
 
-                var xhr = new XMLHttpRequest();
-                xhr.open('GET', 'https://api.opentopodata.org/v1/eudem25m?locations=' + e.latlng.lat + ',' + e.latlng.lng);
-                xhr.onload = function () {
-                    if (xhr.status === 200) {
-                        var data = JSON.parse(xhr.responseText);
-                        var altitude = data.results[0].elevation;
-                        console.log(altitude);
-                        marker.bindPopup(markerName.toString() + "<br> Altitude : " + altitude + "m");
-                    }
-                };
-                xhr.send();
+
+                fetch(`'https://api.opentopodata.org/v1/eudem25m?locations=' + e.latlng.lat + ',' + e.latlng.ln`)
+                    .then(response => response.json())
+                    .then(data => {
+                        let elevation = data.elevations[0].elevation;
+                        console.log(`Altitude: ${elevation} m`);
+                    })
+                    .catch(error => console.error(error));
             });
         });
 
