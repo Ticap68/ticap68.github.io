@@ -50,13 +50,22 @@
                 markerName += 1;
 
 
-                fetch('https://api.opentopodata.org/v1/eudem25m?locations=' + e.latlng.lat + ',' + e.latlng.ln)
-                    .then(response => response.json())
-                    .then(data => {
-                        let elevation = data.elevations[0].elevation;
-                        console.log(`Altitude: ${elevation} m`);
+                try {
+                const response = await fetch('https://api.open-elevation.com/api/v1/lookup', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        'locations': [{ 'latitude': e.latlng.lat, 'longitude': e.latlng.lng }]
                     })
-                    .catch(error => console.error(error));
+                });
+                const data = await response.json();
+                return data.results[0].elevation;
+            } catch (error) {
+                console.error(error);
+            }
+        }
             });
         });
 
