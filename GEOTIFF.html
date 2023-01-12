@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+
+<head>
+    <title>Altitude de Colmar, France</title>
+   <script src="tiff.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.6.1/proj4.js"> </script>
+</head>
+
+<body>
+<p> sa </p>
+<script>
+console.log("hello");
+// définir le système de projection de votre fichier GeoTIFF
+  var sourceProj = 'EPSG:4326';
+  // définir le système de projection souhaité pour les coordonnées GPS
+  var destProj = 'EPSG:3857';
+  var xhr = new XMLHttpRequest({mode:'no-cors'});
+  xhr.open('GET', 'output_GMRT.tif');
+  xhr.responseType = 'arraybuffer';
+  xhr.onload = function (e) {
+    var tiffData = new Uint8Array(xhr.response);
+    var tiff = new TIFF(tiffData);
+    var image = tiff.readImage();
+	console.log(image);
+    // Obtenir les coordonnées GPS pour Paris
+    var lat = 48.8566;
+    var lon = 2.3522;
+    // convertir les coordonnées GPS en coordonnées de pixels
+    var coords = proj4(sourceProj, destProj, [lon, lat]);
+    var x = coords[0];
+    var y = coords[1];
+	console.log(x);
+    // Lire les données d'altitude à partir de la position spécifiée
+    var altitude = image.getPixel(x, y);
+    console.log(altitude);
+  };
+  xhr.send();
+</script>
+
+
+
+</body>
+
+</html>
