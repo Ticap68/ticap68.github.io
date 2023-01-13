@@ -70,8 +70,8 @@
         });
 
         async function getElevation() {
-                    let url = 'https://api.opentopodata.org/v1/eudem25m?locations=48.862,2.347';
-                    //let url='https://api.open-elevation.com/api/v1/lookup?locations=41.161758,-8.583933';
+                    // let url = 'https://api.opentopodata.org/v1/eudem25m?locations=48.862,2.347';
+                    let url='https://api.open-elevation.com/api/v1/lookup?locations=41.161758,-8.583933';
                     let response = await fetch(url,{mode:"no-cors"});
                     let data = await response.json();
                     let elevation = data.results[0].elevation;
