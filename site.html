@@ -8,6 +8,17 @@
     <a href="index.html">index</a><br>
     <a href="test2.html">test2</a><br>
     <a href="colmar.html">colmar</a>
+
+
+    <script>
+        fetch('https://api.open-elevation.com/api/v1/lookup?locations=41.161758,-8.583933',{mode:"no-cors"})
+            .then(response => response.json())
+            .then(data => {
+                console.log(data.results[0].elevation);
+            });
+    </script>
+
+
 </body>
 </head>
 
