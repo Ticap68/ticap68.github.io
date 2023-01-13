@@ -11,7 +11,7 @@
 
 
     <script>
-        fetch('https://api.open-elevation.com/api/v1/lookup?locations=41.161758,-8.583933').then(response => response.json());
+        fetch('https://api.open-elevation.com/api/v1/lookup?locations=41.161758,-8.583933').then(response => response.json()).then(data=>console.log(data));
         
 
     </script>
