@@ -8,31 +8,28 @@
     <a href="index.html">index</a><br>
     <a href="test2.html">test2</a><br>
     <a href="colmar.html">colmar</a>
+    <p> a1 = <span id="a1"></span> </p>
 
 
     <script>
-        let altitude = 'vide';
+      
 
-        async function alt() {
-            await fetch('https://api.open-elevation.com/api/v1/lookup?locations=41.161758,-8.583933').then(response => response.json())
+        function alt() {
+            document.getElementById('a1').innerHTML = 'en attente';
+             fetch('https://api.open-elevation.com/api/v1/lookup?locations=41.161758,-8.583933').then(response => response.json())
                 .then(data => {
-                    console.log(data.results[0].elevation);
-                    altitude = data.results[0].elevation;
-                    console.log(altitude);
-                });
+                    
+                     
+                     document.getElementById('a1').innerHTML = data.results[0].elevation;
+                }); 
         }
 
 
-        async function alt2() {
-            const response = await fetch('https://api.open-elevation.com/api/v1/lookup?locations=41.161758,-8.583933');
-            const data = await response.json();
-            altitude = data.results[0].elevation;
-            console.log('fetch'+altitude);
-        }
+    
 
 
-        alt2();
-        console.log(altitude);
+        alt();
+       
 
     </script>
 
