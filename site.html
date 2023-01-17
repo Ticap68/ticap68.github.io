@@ -3,18 +3,26 @@
 <meta charset="utf-8">
 
 <head>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+        crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+        integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+</head>
 
 <body>
-    <a href="index.html">index</a><br>
-    <a href="test2.html">test2</a><br>
-    <a href="colmar.html">colmar</a>
+    <div id="map" style="width: 1000px; height: 600px;"></div>
     <p> a1 = <span id="a1">vide</span> </p>
     <button id="actualiser">actualiser</button>
-
     <script>
-        let altitude = 'vide';
+        var map = L.map('map').setView([48.0833, 7.3667], 13);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
 
-        function alt() {
+        let markersTab = new Array();
+
+        function getAlti() {
             fetch('https://api.open-elevation.com/api/v1/lookup?locations=41.161758,-8.583933').then(response => response.json())
                 .then(data => {
                     //console.log(data.results[0].elevation);
@@ -23,17 +31,38 @@
                 });
         }
 
-        alt();
+        //Variable pour la couche de marqueurs
+        var markers = new L.FeatureGroup();
+        map.addLayer(markers);
+
+        //Variable pour le nom des marqueurs
+        var markerName = 1;
+
+        //Référence aux boutons HTML
+        var addMarkerButton = document.getElementById('add-marker-button');
+        var removeMarkerButton = document.getElementById('remove-marker-button');
+
+        //Ajout de l'event de click pour ajouter un marqueur
+        addMarkerButton.addEventListener('click', function () {
+            map.once('click', function (e) {
+                var marker = L.marker(e.latlng).addTo(markers);
+                marker.bindPopup(markerName.toString());
+                markerName += 1;
+            }
+            )
+        });
+
+        //Suppression de l'event de click pour ajouter un marqueur
+        removeMarkerButton.addEventListener('click', function () {
+            map.off('click');
+            markers.clearLayers();
+            markerName = 1;
+        });
 
         actualiser.addEventListener('click', function () {
             console.log(altitude);
             document.getElementById('a1').innerHTML = altitude;
         });
-
     </script>
-
-
 </body>
-</head>
-
 </html>
