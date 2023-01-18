@@ -14,6 +14,11 @@
     <div id="map" style="width: 1000px; height: 600px;"></div>
     <p> a1 = <span id="a1">vide</span> </p>
     <button id="actualiser">actualiser</button>
+     <!-- bouton pour ajouter un marqueur -->
+     <button id="add-marker-button">Add marker</button>
+     <!-- bouton pour supprimer les marqueurs -->
+     <button id="remove-marker-button">Remove marker</button>
+     
     <script>
         var map = L.map('map').setView([48.0833, 7.3667], 13);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
