@@ -46,13 +46,10 @@
         //Ajout de l'event de click pour ajouter un marqueur
         addMarkerButton.addEventListener('click', function () {
             map.once('click', function (e) {
-               // var marker = L.marker(e.latlng).addTo(markers);
                 let marker = L.marker(e.latlng).addTo(map);
                 markers.push(marker);    
                 marker.bindPopup(markerName.toString());
                 markerName += 1;
-
-                
             }
             )
         });
