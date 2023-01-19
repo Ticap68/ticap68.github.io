@@ -58,11 +58,12 @@
 
         //Suppression de l'event de click pour ajouter un marqueur
         removeMarkerButton.addEventListener('click', function () {
-            var markerGroup = L.layerGroup(markers);
             map.off('click');
-            markerGroup.clearLayers();
             markerName = 1;
             markers = [];
+            markers.forEach(function (marker) {
+                marker.remove();
+            });
         });
 
         afficher.addEventListener('click', function () {
