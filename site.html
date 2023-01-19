@@ -26,19 +26,15 @@
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
 
-        let markersTab = new Array();
+        let markers = [];
 
         function getAlti(lat, lng) {
-            fetch('https://api.open-elevation.com/api/v1/lookup?locations='+ lat + ',' + lng).then(response => response.json())
+            fetch('https://api.open-elevation.com/api/v1/lookup?locations=' + lat + ',' + lng).then(response => response.json())
                 .then(data => {
                     console.log(data.results[0].elevation);
                     //altitude = data.results[0].elevation;
                 });
         }
-
-        //Variable pour la couche de marqueurs
-        var markers = new L.FeatureGroup();
-        map.addLayer(markers);
 
         //Variable pour le nom des marqueurs
         var markerName = 1;
@@ -50,9 +46,13 @@
         //Ajout de l'event de click pour ajouter un marqueur
         addMarkerButton.addEventListener('click', function () {
             map.once('click', function (e) {
-                var marker = L.marker(e.latlng).addTo(markers);
+               // var marker = L.marker(e.latlng).addTo(markers);
+                let marker = L.marker(e.latlng).addTo(map);
+                markers.push(marker);    
                 marker.bindPopup(markerName.toString());
                 markerName += 1;
+
+                
             }
             )
         });
@@ -67,14 +67,13 @@
         actualiser.addEventListener('click', function () {
             //console.log(altitude);
             //document.getElementById('a1').innerHTML = altitude;
-            markers.eachLayer(function (marker) {
-                var lat = marker.getLatLng().lat;
-                var lng = marker.getLatLng().lng;
-                getAlti(lat, lng);
 
-                //console.log(lat, lng);
-            });
+
+            getAlti(lat, lng);
+
+
         });
+        
 
 
 
