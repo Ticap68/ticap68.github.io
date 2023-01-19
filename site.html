@@ -29,7 +29,8 @@
         let markers = [];
 
         function getAlti(marker) {
-            fetch('https://api.open-elevation.com/api/v1/lookup?locations=' + marker.getLatLng()).then(response => response.json())
+            let latlng = marker.getLatLng();
+            fetch('https://api.open-elevation.com/api/v1/lookup?locations=' + latlng.lat + ',' + latlng.lng).then(response => response.json())
                 .then(data => {
                     marker.altitude = data.results[0].elevation;
                     console.log(marker.altitude);
@@ -57,13 +58,17 @@
 
         //Suppression de l'event de click pour ajouter un marqueur
         removeMarkerButton.addEventListener('click', function () {
+            var markerGroup = L.layerGroup(markers);
             map.off('click');
-            markers.clearLayers();
+            markerGroup.clearLayers();
             markerName = 1;
+            markers = [];
         });
 
         afficher.addEventListener('click', function () {
-       
+            markers.forEach(function (marker) {
+                console.log(marker.getPopup().getContent() + ': ' + marker.altitude);
+            });
         });
     </script>
 </body>
