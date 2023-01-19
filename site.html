@@ -13,7 +13,7 @@
 <body>
     <div id="map" style="width: 1000px; height: 600px;"></div>
     <p> a1 = <span id="a1">vide</span> </p>
-    <button id="actualiser">actualiser</button>
+    <button id="afficher">afficher</button>
     <!-- bouton pour ajouter un marqueur -->
     <button id="add-marker-button">Add marker</button>
     <!-- bouton pour supprimer les marqueurs -->
@@ -28,11 +28,11 @@
 
         let markers = [];
 
-        function getAlti(lat, lng) {
+        function getAlti(marker) {
             fetch('https://api.open-elevation.com/api/v1/lookup?locations=' + lat + ',' + lng).then(response => response.json())
                 .then(data => {
-                    console.log(data.results[0].elevation);
-                    //altitude = data.results[0].elevation;
+                    marker.altitude = data.results[0].elevation;
+                    console.log(marker.altitude);
                 });
         }
 
@@ -47,9 +47,10 @@
         addMarkerButton.addEventListener('click', function () {
             map.once('click', function (e) {
                 let marker = L.marker(e.latlng).addTo(map);
-                markers.push(marker);    
+                markers.push(marker);
                 marker.bindPopup(markerName.toString());
                 markerName += 1;
+                getAlti(marker);
             }
             )
         });
@@ -61,7 +62,7 @@
             markerName = 1;
         });
 
-        actualiser.addEventListener('click', function () {
+        afficher.addEventListener('click', function () {
             //console.log(altitude);
             //document.getElementById('a1').innerHTML = altitude;
 
@@ -70,7 +71,7 @@
 
 
         });
-        
+
 
 
 
