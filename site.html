@@ -29,7 +29,7 @@
         let markers = [];
 
         function getAlti(marker) {
-            fetch('https://api.open-elevation.com/api/v1/lookup?locations=' + lat + ',' + lng).then(response => response.json())
+            fetch('https://api.open-elevation.com/api/v1/lookup?locations=' + marker.getLatLng()).then(response => response.json())
                 .then(data => {
                     marker.altitude = data.results[0].elevation;
                     console.log(marker.altitude);
