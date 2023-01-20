@@ -78,7 +78,7 @@
                 let diff = markers[1].altitude - markers[0].altitude;
                 document.getElementById('a1').innerHTML = diff;
 
-                let distance = markers[0].marker.getLatLng().distanceTo(markers[1].marker.getLatLng());
+                let distance = markers[0].getLatLng().distanceTo(markers[1].getLatLng());
                 document.getElementById('distance').innerHTML = distance;
             }
         });
