@@ -16,11 +16,14 @@
     <p> distance = <span id="distance">vide</span> </p>
 
 
-    <button id="afficher">afficher</button>
+
     <!-- bouton pour ajouter un marqueur -->
     <button id="add-marker-button">Add marker</button>
+
     <!-- bouton pour supprimer les marqueurs -->
     <button id="remove-marker-button">Remove marker</button>
+    <button id="afficher">afficher</button>
+    <button id="drag">déplacer marqueurs on/off</button>
 
     <script>
 
@@ -82,6 +85,22 @@
                 document.getElementById('distance').innerHTML = distance;
             }
         });
+        let dragOn = 0;
+        drag.addEventListener('click', function () {
+            if (dragOn == 0) {
+                markers.forEach(function (marker) {
+                    marker.dragging.enable();
+                })
+                dragOn = 1;
+            }
+            if (dragOn == 1) {
+                markers.forEach(function (marker) {
+                    marker.dragging.disable();
+                })
+                dragOn = 0;
+            }
+        })
+
     </script>
 </body>
 
