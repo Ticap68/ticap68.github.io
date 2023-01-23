@@ -15,15 +15,25 @@
     <p> a1 = <span id="a1">vide</span> </p>
     <p> distance = <span id="distance">vide</span> </p>
 
-
-
     <!-- bouton pour ajouter un marqueur -->
     <button id="add-marker-button">Add marker</button>
 
     <!-- bouton pour supprimer les marqueurs -->
     <button id="remove-marker-button">Remove marker</button>
     <button id="afficher">afficher</button>
-    <button id="drag">déplacer marqueurs on/off</button>
+
+    <form id="calculator-form">
+        <label for="vitesse">Vitesse :</label>
+        <input type="number" id="vitesse" min="0" step="0.1">
+        <br>
+        <label for="tauxChute">Taux de chute :</label>
+        <input type="number" id="tauxChute" min="0" step="0.1">
+        <br>
+        <button type="submit">Calculer</button>
+    </form>
+
+    <span id="resultat"></span>
+
 
     <script>
 
@@ -83,24 +93,27 @@
 
                 let distance = markers[0].getLatLng().distanceTo(markers[1].getLatLng());
                 document.getElementById('distance').innerHTML = distance;
+
+
+
+
             }
+
+
+
+
         });
-        let dragOn = 0;
-        drag.addEventListener('click', function () {
-            if (dragOn == 0) {
-                markers.forEach(function (marker) {
-                    marker.dragging.enable();
-                })
-                dragOn = 1;
-            }
-            else if (dragOn == 1) {
-                markers.forEach(function (marker) {
-                    marker.dragging.disable();
-                })
-                dragOn = 0;
-            }
-            console.log(dragOn);
-        })
+
+        const calculatorForm = document.getElementById('calculator-form');
+        const resultat = document.getElementById('resultat');
+        calculatorForm.addEventListener('submit', event => {
+            event.preventDefault();
+            const vitesse = Number(document.getElementById('vitesse').value);
+            const tauxChute = Number(document.getElementById('tauxChute').value);
+            const result = (vitesse * 1000 / 3600) / tauxChute;
+            resultat.textContent = `Résultat : ${result}`;
+        });
+
 
     </script>
 </body>
