@@ -32,7 +32,9 @@
         <button type="submit">Calculer</button>
     </form>
 
-    <span id="resultat"></span>
+    <p> finesse = <span id="finesse">vide</span> </p>
+
+    <p> hauteur = <span id="hauteur">vide</span> </p>
 
 
     <script>
@@ -94,15 +96,12 @@
                 let distance = markers[0].getLatLng().distanceTo(markers[1].getLatLng());
                 document.getElementById('distance').innerHTML = distance;
 
-
-
+                let hauteur = distance / finesse ;
+                document.getElementById('hauteur').innerHTML = hauteur;
 
             }
-
-
-
-
         });
+
         let finesse = null;
         const calculatorForm = document.getElementById('calculator-form');
         const resultat = document.getElementById('resultat');
