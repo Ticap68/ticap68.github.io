@@ -21,7 +21,7 @@
         <br>
         <button type="submit">Calculer</button>
     </form>
-    finesse = <span id="finesse">vide</span><br>
+    finesse = <span id="finesse">vide</span><br><br>
 
     <!-- bouton pour ajouter un marqueur -->
     <button id="add-marker-button">Add marker</button>
@@ -46,7 +46,7 @@
     <script>
 
         var map = L.map('map').setView([48.0833, 7.3667], 13);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
 
