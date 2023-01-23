@@ -12,7 +12,11 @@
 
 <body>
     <div id="map" style="width: 1000px; height: 600px;"></div>
-    <p> a1 = <span id="a1">vide</span> </p>
+    <p> Altitude relief depart = <span id="a1">vide</span> <br>
+        Altitude relief arrivé = <span id="a2">vide</span> <br>
+        Altitude de départ requise = <span id="alti">vide</span> <br>
+
+    </p>
     <p> distance = <span id="distance">vide</span> </p>
 
     <!-- bouton pour ajouter un marqueur -->
@@ -90,14 +94,18 @@
             });
 
             if (markerName > 2) {
-                let diff = markers[1].altitude - markers[0].altitude;
-                document.getElementById('a1').innerHTML = diff;
+                document.getElementById('a1').innerHTML = markers[0].altitude;
+                document.getElementById('a2').innerHTML = markers[1].altitude;
 
                 let distance = markers[0].getLatLng().distanceTo(markers[1].getLatLng());
                 document.getElementById('distance').innerHTML = distance;
 
-                let hauteur = distance / finesse ;
+                let hauteur = distance / finesse;
                 document.getElementById('hauteur').innerHTML = hauteur;
+
+                document.getElementById('alti').innerHTML = markers[1].altitude + hauteur;
+
+
 
             }
         });
