@@ -8,6 +8,9 @@
         crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
         integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+    <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css">
+    <link rel="stylesheet" href="css/leaflet.awesome-markers.css">
+    <script src="js/leaflet.awesome-markers.js"></script>
 </head>
 
 <body>
@@ -63,7 +66,7 @@
                 let marker = L.marker(e.latlng).addTo(map);
                 markers.push(marker);
                 //marker.bindPopup(markerName.toString());
-                marker.bindPopup("<div style='background-color: red;'>" + markerName + "</div>")
+                marker.bindPopup(markerName)
                 markerName += 1;
                 getAlti(marker);
             }
@@ -87,12 +90,7 @@
 
             if (markerName > 2) {
 
-                markers[1].setIcon(new L.Icon({
-                    iconUrl: 'path/to/icon-green.png',
-                    iconSize: [25, 41],
-                    iconAnchor: [12, 41],
-                    popupAnchor: [1, -34]
-                }));
+                markers[1].setIcon(L.AwesomeMarkers.icon({ icon: 'star', markerColor: 'red' }));
 
                 document.getElementById('a1').innerHTML = markers[0].altitude;
                 document.getElementById('a2').innerHTML = markers[1].altitude;
