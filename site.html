@@ -65,8 +65,7 @@
             map.once('click', function (e) {
                 let marker = L.marker(e.latlng).addTo(map);
                 markers.push(marker);
-                //marker.bindPopup(markerName.toString());
-                marker.bindPopup(markerName)
+                marker.bindPopup(markerName.toString());
                 markerName += 1;
                 getAlti(marker);
             }
