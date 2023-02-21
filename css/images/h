@@ -1,0 +1,29 @@
+Pour basculer entre les deux API, vous pouvez ajouter un champ de sélection HTML et une fonction qui détermine quelle API utiliser en fonction de la valeur sélectionnée dans ce champ. Voici comment vous pouvez modifier votre code HTML et JavaScript pour cela :
+
+HTML :
+
+php
+Copy code
+<select id="api-select">
+    <option value="open-elevation">Open Elevation</option>
+    <option value="opentopodata">OpenTopoData</option>
+</select>
+JavaScript :
+
+javascript
+Copy code
+function getAlti(marker) {
+    let latlng = marker.getLatLng();
+    let api = document.getElementById('api-select').value;
+    let api_url = '';
+    if (api === 'open-elevation') {
+        api_url = 'https://api.open-elevation.com/api/v1/lookup?locations=';
+    } else if (api === 'opentopodata') {
+        api_url = 'https://api.opentopodata.org/v1/test-dataset?locations=';
+    }
+    fetch(api_url + latlng.lat + ',' + latlng.lng,{mode:"no-cors"}).then(response => response.json())
+        .then(data => {
+            marker.altitude = data.results[0].elevation;
+            console.log(marker.altitude);
+        });
+}
