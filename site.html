@@ -46,7 +46,7 @@
 
         function getAlti(marker) {
             let latlng = marker.getLatLng();
-            fetch('https://api.open-elevation.com/api/v1/lookup?locations=' + latlng.lat + ',' + latlng.lng).then(response => response.json())
+            fetch('https://api.open-elevation.com/api/v1/lookup?locations=' + latlng.lat + ',' + latlng.lng,{mode:"no-cors"}).then(response => response.json())
                 .then(data => {
                     marker.altitude = data.results[0].elevation;
                     console.log(marker.altitude);
