@@ -15,40 +15,31 @@
 </head>
 
 <body>
-    <div id="map" style="width: 1000px; height: 600px;"></div>
-
-    <form id="calculator-form">
-        <label for="vitesse">Vitesse :</label>
-        <input type="number" id="vitesse" min="0" step="0.1">
-        <br>
-        <label for="tauxChute">Taux de chute :</label>
-        <input type="number" id="tauxChute" min="0" step="0.1">
-        <br>
-        <button type="submit">Calculer</button>
-    </form>
 
 
 
-    
-    <div class="hidden-columns">
-        <div class="column1">
-            <span id="finesse">vide</span><br><br>
-            <!-- bouton pour ajouter un marqueur -->
-            <button id="add-marker-button">Add marker</button>
-            <!-- bouton pour supprimer les marqueurs -->
-            <button id="remove-marker-button">Remove all markers</button>
-        </div>
-        <div class="column2">
-            Altitude relief depart = <span id="a1">vide</span> <br>
-            Altitude relief arrivé = <span id="a2">vide</span> <br>
-            distance = <span id="distance">vide</span><br><br>
-            hauteur = <span id="hauteur">vide</span><br><br>
-        </div>
-        <div class="column3">
-            Altitude de départ requise = <span id="alti">vide</span>
-        </div>
-    </div>
-
+    <div class="container">
+        <div id="map" style="width: 1000px; height: 600px;"></div>
+        <form id="calculator-form">
+          <label for="vitesse">Vitesse :</label>
+          <input type="number" id="vitesse" min="0" step="0.1">
+          <br>
+          <label for="tauxChute">Taux de chute :</label>
+          <input type="number" id="tauxChute" min="0" step="0.1">
+          <br>
+          <button type="submit">Calculer</button>
+        </form>
+        <span id="finesse">finesse</span>
+        <button id="add-marker-button">Add marker</button>
+        <button id="remove-marker-button">Remove all markers</button>
+        <button id="afficher">afficher</button>
+        <span id="a1">Altitude relief depart</span>
+        <span id="a2">Altitude relief arrivé</span>
+        <span id="distance">distance</span>
+        <span id="hauteur">hauteur</span>
+        <span id="alti">Altitude de départ requise</span>
+      </div>
+      
 
 
 
