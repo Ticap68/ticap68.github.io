@@ -50,7 +50,7 @@
 
         let markers = [];
 
-        function getAlti2(marker) {
+        function getAlti(marker) {
             let latlng = marker.getLatLng();
             fetch('https://api.open-elevation.com/api/v1/lookup?locations=' + latlng.lat + ',' + latlng.lng, { mode: "no-cors" }).then(response => response.json())
                 .then(data => {
@@ -59,7 +59,7 @@
                 });
         }
 
-        function getAlti(marker) {
+        function getAlti3(marker) {
             let latlng = marker.getLatLng();
             let api = document.getElementById('api-select').value;
             let api_url = '';
@@ -68,12 +68,21 @@
             } else if (api === 'opentopodata') {
                 api_url = 'https://api.opentopodata.org/v1/test-dataset?locations=';
             }
-            fetch(api_url + latlng.lat + ',' + latlng.lng, { mode: "no-cors" }).then(response => response.json())
+            fetch(api_url + latlng.lat + ',' + latlng.lng, { mode: "no-cors" })
+                .then(response => response.json())
                 .then(data => {
                     marker.altitude = data.results[0].elevation;
                     console.log(marker.altitude);
                 });
         }
+
+
+        fetch('https://api.open-meteo.com/v1/elevation?latitude=52.52&longitude=13.41')
+            .then(response => response.json())
+            .then(data => {
+                const elevation = data.elevation[0];
+                console.log(elevation); // affiche 38.0
+            });
 
 
         //Variable pour le nom des marqueurs
