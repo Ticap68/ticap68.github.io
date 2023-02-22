@@ -50,7 +50,7 @@
 
         let markers = [];
 
-        function getAlti(marker) {
+        function getAlti2(marker) {
             let latlng = marker.getLatLng();
             fetch('https://api.open-elevation.com/api/v1/lookup?locations=' + latlng.lat + ',' + latlng.lng, { mode: "no-cors" }).then(response => response.json())
                 .then(data => {
@@ -76,14 +76,15 @@
                 });
         }
 
-
-        fetch('https://api.open-meteo.com/v1/elevation?latitude=52.52&longitude=13.41')
-            .then(response => response.json())
-            .then(data => {
-                const elevation = data.elevation[0];
-                console.log(elevation); // affiche 38.0
-            });
-
+        function getAlti(marker) {
+            let latlng = marker.getLatLng();
+            fetch('https://api.open-meteo.com/v1/elevation?latitude=' + latlng.lat + '&longitude=' + latlng.lng)
+                .then(response => response.json())
+                .then(data => {
+                    //  const elevation = data.elevation[0];
+                    marker.altitude = data.results[0];
+                });
+        }
 
         //Variable pour le nom des marqueurs
         var markerName = 1;
