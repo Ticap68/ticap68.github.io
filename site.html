@@ -9,6 +9,7 @@
     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
         integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css">
+    <link rel="stylesheet" href="css/site.css">
     <link rel="stylesheet" href="css/leaflet.awesome-markers.css">
     <script src="js/leaflet.awesome-markers.js"></script>
 </head>
@@ -26,19 +27,36 @@
         <button type="submit">Calculer</button>
     </form>
 
-    finesse = <span id="finesse">vide</span><br><br>
 
-    <!-- bouton pour ajouter un marqueur -->
-    <button id="add-marker-button">Add marker</button>
-    <!-- bouton pour supprimer les marqueurs -->
-    <button id="remove-marker-button">Remove all markers</button><br><br>
 
-    <button id="afficher">Actualiser</button> <br><br>
-    A1 ; Altitude relief depart = <span id="a1">vide</span> <br>
-    A2 ; Altitude relief arrivé = <span id="a2">vide</span> <br>
-    distance = <span id="distance">vide</span><br><br>
-    H1 ; distance / finesse = <span id="hauteur">vide</span><br><br>
-    Altitude de départ requise ; A2 + H1 = <span id="alti">vide</span>
+    
+    <div class="hidden-columns">
+        <div class="column1">
+            <span id="finesse">vide</span><br><br>
+            <!-- bouton pour ajouter un marqueur -->
+            <button id="add-marker-button">Add marker</button>
+            <!-- bouton pour supprimer les marqueurs -->
+            <button id="remove-marker-button">Remove all markers</button>
+        </div>
+        <div class="column2">
+            Altitude relief depart = <span id="a1">vide</span> <br>
+            Altitude relief arrivé = <span id="a2">vide</span> <br>
+            distance = <span id="distance">vide</span><br><br>
+            hauteur = <span id="hauteur">vide</span><br><br>
+        </div>
+        <div class="column3">
+            Altitude de départ requise = <span id="alti">vide</span>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
 
     <!--
     <select id="api-select">
