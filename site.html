@@ -35,6 +35,12 @@
     distance = <span id="distance">vide</span><br><br>
     hauteur = <span id="hauteur">vide</span><br><br>
     Altitude de départ requise = <span id="alti">vide</span>
+
+    <select id="api-select">
+        <option value="open-elevation">Open Elevation</option>
+        <option value="opentopodata">OpenTopoData</option>
+    </select>
+
     <script>
 
         var map = L.map('map').setView([47.216124, 6.055531], 6);
@@ -44,14 +50,31 @@
 
         let markers = [];
 
-        function getAlti(marker) {
+        function getAlti2(marker) {
             let latlng = marker.getLatLng();
-            fetch('https://api.open-elevation.com/api/v1/lookup?locations=' + latlng.lat + ',' + latlng.lng,{mode:"no-cors"}).then(response => response.json())
+            fetch('https://api.open-elevation.com/api/v1/lookup?locations=' + latlng.lat + ',' + latlng.lng, { mode: "no-cors" }).then(response => response.json())
                 .then(data => {
                     marker.altitude = data.results[0].elevation;
                     console.log(marker.altitude);
                 });
         }
+
+        function getAlti(marker) {
+            let latlng = marker.getLatLng();
+            let api = document.getElementById('api-select').value;
+            let api_url = '';
+            if (api === 'open-elevation') {
+                api_url = 'https://api.open-elevation.com/api/v1/lookup?locations=';
+            } else if (api === 'opentopodata') {
+                api_url = 'https://api.opentopodata.org/v1/test-dataset?locations=';
+            }
+            fetch(api_url + latlng.lat + ',' + latlng.lng, { mode: "no-cors" }).then(response => response.json())
+                .then(data => {
+                    marker.altitude = data.results[0].elevation;
+                    console.log(marker.altitude);
+                });
+        }
+
 
         //Variable pour le nom des marqueurs
         var markerName = 1;
@@ -80,7 +103,7 @@
             });
             markerName = 1;
             markers = [];
-        }); 
+        });
 
         afficher.addEventListener('click', function () {
             markers.forEach(function (marker) {
