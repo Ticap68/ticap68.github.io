@@ -82,7 +82,7 @@
                 .then(response => response.json())
                 .then(data => {
                     //  const elevation = data.elevation[0];
-                    marker.altitude = data.results[0];
+                    marker.altitude = data.elevation[0];
                 });
         }
 
