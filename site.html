@@ -124,13 +124,13 @@
 
                 markers[1].setIcon(L.AwesomeMarkers.icon({ icon: 'star', markerColor: 'red' }));
 
-                document.getElementById('a1').innerHTML = markers[0].altitude;
-                document.getElementById('a2').innerHTML = markers[1].altitude;
+                document.getElementById('a1').innerHTML = markers[0].altitude + 'm';
+                document.getElementById('a2').innerHTML = markers[1].altitude + 'm';
                 let distance = markers[0].getLatLng().distanceTo(markers[1].getLatLng());
-                document.getElementById('distance').innerHTML = distance;
+                document.getElementById('distance').innerHTML = distance + 'm';
                 let hauteur = distance / finesse;
-                document.getElementById('hauteur').innerHTML = hauteur;
-                document.getElementById('alti').innerHTML = markers[1].altitude + hauteur;
+                document.getElementById('hauteur').innerHTML = hauteur + 'm';
+                document.getElementById('alti').innerHTML = markers[1].altitude + hauteur + 'm';
             }
         });
 
@@ -142,7 +142,7 @@
             const vitesse = Number(document.getElementById('vitesse').value);
             const tauxChute = Number(document.getElementById('tauxChute').value);
             finesse = (vitesse * 1000 / 3600) / tauxChute;
-            resultat.textContent = `Finesse : ${finesse}`;
+            resultat.textContent = `${finesse}`;
         });
     </script>
 </body>
