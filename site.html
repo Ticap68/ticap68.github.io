@@ -15,6 +15,7 @@
 
 <body>
     <div id="map" style="width: 1000px; height: 600px;"></div>
+
     <form id="calculator-form">
         <label for="vitesse">Vitesse :</label>
         <input type="number" id="vitesse" min="0" step="0.1">
@@ -24,17 +25,21 @@
         <br>
         <button type="submit">Calculer</button>
     </form>
+
     finesse = <span id="finesse">vide</span><br><br>
+
     <!-- bouton pour ajouter un marqueur -->
     <button id="add-marker-button">Add marker</button>
     <!-- bouton pour supprimer les marqueurs -->
     <button id="remove-marker-button">Remove all markers</button><br><br>
-    <button id="afficher">afficher</button> <br><br>
+
+    <button id="afficher">Actualiser</button> <br><br>
     A1 ; Altitude relief depart = <span id="a1">vide</span> <br>
     A2 ; Altitude relief arrivé = <span id="a2">vide</span> <br>
     distance = <span id="distance">vide</span><br><br>
     H1 ; distance / finesse = <span id="hauteur">vide</span><br><br>
     Altitude de départ requise ; A2 + H1 = <span id="alti">vide</span>
+
     <!--
     <select id="api-select">
         <option value="open-elevation">Open Elevation</option>
@@ -42,7 +47,6 @@
     </select>  -->
 
     <script>
-
         var map = L.map('map').setView([47.216124, 6.055531], 6);
         L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -121,9 +125,7 @@
             });
 
             if (markerName > 2) {
-
                 markers[1].setIcon(L.AwesomeMarkers.icon({ icon: 'star', markerColor: 'red' }));
-
                 document.getElementById('a1').innerHTML = markers[0].altitude + 'm';
                 document.getElementById('a2').innerHTML = markers[1].altitude + 'm';
                 let distance = markers[0].getLatLng().distanceTo(markers[1].getLatLng());
