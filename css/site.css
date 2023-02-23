@@ -18,4 +18,11 @@
 #markers {
   grid-column: 1;
   grid-row: 2;
+
+  /* centre horizontalement */
+  text-align: center;
+
+  /* centre verticalement */
+  line-height: 600px;
+
 }
