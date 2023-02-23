@@ -19,10 +19,14 @@
   grid-column: 1;
   grid-row: 2;
 
+  
   /* centre horizontalement */
-  text-align: center;
+  /*text-align: center;
 
-  /* centre verticalement */
-  line-height: 600px;
+  /* centre verticalement  
+  line-height: 100%; */
+
+
+  align-items: center;
 
 }
