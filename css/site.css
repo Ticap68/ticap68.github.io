@@ -14,20 +14,15 @@
 #inputsFinesse {
   grid-column: 2;
   grid-row: 1;
+  /* centre verticalement  */
+  line-height: 100%; 
 }
 
 #markers {
   grid-column: 1;
   grid-row: 2;
-
-  
   /* centre horizontalement */
   text-align: center;
-
   /* centre verticalement  */
   line-height: 100%; 
-
-
-  
-
 }
