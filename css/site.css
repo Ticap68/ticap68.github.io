@@ -2,7 +2,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: auto auto;
-  grid-gap: 10px;
+  grid-gap: 20px;
 }
 
 #map {
@@ -13,4 +13,9 @@
 #inputsFinesse {
   grid-column: 2;
   grid-row: 1;
+}
+
+#markers {
+  grid-column: 1;
+  grid-row: 2;
 }
