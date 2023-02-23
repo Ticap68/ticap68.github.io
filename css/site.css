@@ -1,8 +1,8 @@
 .container {
   /*align-items: center;*/
   display: grid;
-  grid-template-columns: 65%;
-  grid-template-rows: 65%;
+  grid-template-columns: 33% 33% 33%  ;
+  
   grid-gap: 20px;
   /* ajustez cette valeur selon vos besoins */
   height: 100vh;
@@ -11,15 +11,13 @@
 #map {
   grid-row: 1;
   grid-row-end: 1;
-
   grid-column: 1;
-  grid-column-end: 3;
+  grid-column-end: 4;
 }
 
 #inputsFinesse {
   grid-row: 2;
   grid-row-end: 2;
-
   grid-column: 1;
   grid-column-end: 1;
 }
@@ -27,7 +25,6 @@
 #markers {
   grid-row: 2;
   grid-row-end: 2;
-
   grid-column: 2;
   grid-column-end: 2;
 
@@ -40,7 +37,6 @@
 #datas {
   grid-row: 2;
   grid-row-end: 2;
-
   grid-column: 3;
   grid-column-end: 3;
 }
