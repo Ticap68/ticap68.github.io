@@ -1,8 +1,8 @@
 .container {
   /*align-items: center;*/
   display: grid;
-  grid-template-columns: 65% ;
-  grid-template-rows: 65% ;
+  grid-template-columns: 65%;
+  grid-template-rows: 65%;
   grid-gap: 20px;
   /* ajustez cette valeur selon vos besoins */
   height: 100vh;
@@ -16,6 +16,7 @@
 #inputsFinesse {
   grid-column: 2;
   grid-row: 1;
+  text-align: bottom;
   /* centre verticalement  */
   line-height: 100%;
 }
