@@ -3,6 +3,7 @@
   grid-template-columns: 1fr 1fr;
   grid-template-rows: auto auto;
   grid-gap: 20px;
+  /*align-items: center;*/
 }
 
 #map {
@@ -21,12 +22,12 @@
 
   
   /* centre horizontalement */
-  /*text-align: center;
+  text-align: center;
 
-  /* centre verticalement  
-  line-height: 100%; */
+  /* centre verticalement  */
+  line-height: 100%; 
 
 
-  align-items: center;
+  
 
 }
