@@ -1,8 +1,8 @@
 .container {
   /*align-items: center;*/
   display: grid;
-  grid-template-columns: 33% 33% 33%  ;
-  
+  grid-template-columns: 33% 33% 33%;
+  grid-template-rows: 66% 33%;
   grid-gap: 20px;
   /* ajustez cette valeur selon vos besoins */
   height: 100vh;
