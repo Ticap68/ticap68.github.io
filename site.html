@@ -43,8 +43,10 @@
             A1 ; Altitude sol départ = <span id="a1">vide</span> <br>
             A2 ; Altitude sol arrivée = <span id="a2">vide</span> <br><br>
             Distance entre A1 et A2 = <span id="distance">vide</span> <br><br><br>
-            H1 ; distance / finesse = <span id="hauteur">vide</span><br><br>
-            A2 + H1 ; Altitude de départ requise = <span id="alti">vide</span>
+            H1 ; distance / finesse = <span id="hauteur">vide</span> <br><br>
+            A2 + H1 ; Altitude de départ requise = <span id="alti">vide</span> <br><br>
+
+            longueur/hauteur <span id="finesseSol">vide</span>
         </div>
     </div>
 
@@ -147,11 +149,17 @@
                 markers[1].setIcon(L.AwesomeMarkers.icon({ icon: 'star', markerColor: 'red' }));
                 document.getElementById('a1').innerHTML = markers[0].altitude + ' m';
                 document.getElementById('a2').innerHTML = markers[1].altitude + ' m';
+
                 let distance = markers[0].getLatLng().distanceTo(markers[1].getLatLng());
                 document.getElementById('distance').innerHTML = distance + ' m';
+
                 let hauteur = distance / finesse;
                 document.getElementById('hauteur').innerHTML = hauteur + ' m';
                 document.getElementById('alti').innerHTML = markers[1].altitude + hauteur + ' m';
+
+                let hauteurA2A1 = markers[0].altitude - markers[1].altitude;
+                let finesse2 = distance / hauteurA2A1;
+                document.getElementById('finesseSol').innerHTML = finesse2;
             }
         });
 

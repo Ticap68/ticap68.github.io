@@ -23,7 +23,6 @@
 #markers {
   grid-row: 2;
   grid-column: 3;
-
   /* centre horizontalement
   text-align: center;
   /* centre verticalement  
@@ -33,5 +32,4 @@
 #datas {
   grid-row: 2;
   grid-column: 4;
-
 }
