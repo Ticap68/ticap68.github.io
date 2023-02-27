@@ -39,7 +39,7 @@
         </div>
 
         <div id=datas>
-            <button id="afficher">Actualiser</button> <br><br>
+            <button id="actualiser">Actualiser</button> <br><br>
             A1 ; Altitude sol départ = <span id="a1">vide</span> <br>
             A2 ; Altitude sol arrivée = <span id="a2">vide</span> <br><br>
             Distance entre A1 et A2 = <span id="distance">vide</span> <br><br><br>
@@ -61,6 +61,17 @@
         }).addTo(map);
 
         let markers = [];
+
+        let finesse = null;
+        const calculatorForm = document.getElementById('calculator-form');
+        const resultat = document.getElementById('finesse');
+        calculatorForm.addEventListener('submit', event => {
+            event.preventDefault();
+            const vitesse = Number(document.getElementById('vitesse').value);
+            const tauxChute = Number(document.getElementById('tauxChute').value);
+            finesse = (vitesse * 1000 / 3600) / tauxChute;
+            resultat.textContent = `${finesse}`;
+        });
 
         function getAlti2(marker) {
             let latlng = marker.getLatLng();
@@ -127,7 +138,7 @@
             markers = [];
         });
 
-        afficher.addEventListener('click', function () {
+        actualiser.addEventListener('click', function () {
             markers.forEach(function (marker) {
                 console.log(marker.getPopup().getContent() + ': ' + marker.altitude);
             });
@@ -144,16 +155,6 @@
             }
         });
 
-        let finesse = null;
-        const calculatorForm = document.getElementById('calculator-form');
-        const resultat = document.getElementById('finesse');
-        calculatorForm.addEventListener('submit', event => {
-            event.preventDefault();
-            const vitesse = Number(document.getElementById('vitesse').value);
-            const tauxChute = Number(document.getElementById('tauxChute').value);
-            finesse = (vitesse * 1000 / 3600) / tauxChute;
-            resultat.textContent = `${finesse}`;
-        });
     </script>
 </body>
 
