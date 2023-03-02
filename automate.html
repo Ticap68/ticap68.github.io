@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Altitude</title>
+</head>
+
+<body>
+    <h1>Altitude</h1>
+    <p>Altitude : <span id="altitude"></span></p>
+</body>
+
+<script>
+
+
+    // Définir les coordonnées de la zone à parcourir
+    const topLeft = { lat: 48.8534, lng: 2.3488 }; // coin gauche haut
+    const bottomRight = { lat: 48.8155, lng: 2.4182 }; // coin bas droit
+
+    // Définir l'intervalle de distance entre chaque point
+    const interval = 20; // mètres
+
+    // Fonction pour récupérer l'altitude d'un point
+    function getAltitude(lat, lng) {
+        const url = `https://api.open-meteo.com/v1/elevation?latitude=${lat}&longitude=${lng}`;
+        return fetch(url)
+            .then((response) => response.json())
+            .then((data) => {
+                const altitude = data.elevation[0];
+                return altitude;
+            });
+    }
+
+    // Fonction pour parcourir la zone et écrire les altitudes dans un fichier texte
+    async function writeAltitudesToFile() {
+        // Ouvrir un nouveau fichier texte pour écrire les données
+        const fs = require('fs');
+        const file = fs.createWriteStream('altitudes.txt');
+
+        // Boucle pour itérer sur les points dans la zone
+        for (let lat = topLeft.lat; lat >= bottomRight.lat; lat -= interval / 111111) { // 1 degré de latitude équivaut à 111111 mètres
+            for (let lng = topLeft.lng; lng <= bottomRight.lng; lng += interval / (111111 * Math.cos(lat * Math.PI / 180))) { // 1 degré de longitude équivaut à 111111 mètres à l'équateur, mais varie en fonction de la latitude
+                // Appeler la fonction getAltitude pour récupérer l'altitude de chaque point
+                const altitude = await getAltitude(lat, lng);
+
+                // Écrire les données dans le fichier texte
+                file.write(`${lat}, ${lng}, ${altitude}\n`);
+            }
+        }
+
+        // Fermer le fichier
+        file.end();
+    }
+
+    // Appeler la fonction pour parcourir la zone et écrire les altitudes dans un fichier texte
+    //writeAltitudesToFile();
+
+
+
+    
+    getAltitude(); // Call the function once at page load
+
+    setInterval(getAltitude, 10000); // Call the function every 10 seconds
+
+
+</script>
+
+</html>
