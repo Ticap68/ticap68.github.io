@@ -1,7 +1,7 @@
 .container {
   /*align-items: center;*/
   display: grid;
-  grid-template-columns: 10% 20% 30% 20% 20%;
+  grid-template-columns: 10% 20% 25% 25% 20%;
   grid-template-rows: 66% 33%;
   grid-gap: 20px;
   /* ajustez cette valeur selon vos besoins */
