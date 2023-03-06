@@ -110,7 +110,7 @@
 
         function getAlti(marker) {
             let latlng = marker.getLatLng();
-            fetch('https://api.open-meteo.com/v1/elevation?latitude=&longitude='+ latlng.lat + '&longitude=' + latlng.lng)
+            fetch('https://api.open-meteo.com/v1/elevation?latitude='+ latlng.lat + '&longitude=' + latlng.lng)
                 .then(response => response.json())
                 .then(data => {
                     //  const elevation = data.elevation[0];
