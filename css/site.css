@@ -7,7 +7,7 @@
   /* ajustez cette valeur selon vos besoins */
   height: 100vh;
 }
-
+ 
 #map {
   grid-row: 1;
   grid-row-end: 1;
