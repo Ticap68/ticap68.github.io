@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Ma carte Leaflet</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" />
+</head>
+
+<body>
+    <div id="map" style="height: 400px;"></div>
+    <button id="btnTopLeft">Coin haut gauche</button>
+    <button id="btnBottomRight">Coin bas droit</button>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
+    <script>
+        // Initialisation de la carte
+        var map = L.map('map').setView([48.8534, 2.3488], 12);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: 'Map data &copy; OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Variables pour stocker les coordonnées des coins
+        var topLeft = null;
+        var bottomRight = null;
+
+        // Fonction pour placer un marqueur et stocker les coordonnées du coin haut gauche
+        function onTopLeftClick(e) {
+            if (topLeft !== null) {
+                map.removeLayer(topLeft);
+            }
+            topLeft = L.marker(e.latlng).addTo(map);
+            console.log("Top left coordinates: " + e.latlng.toString());
+        }
+        document.getElementById("btnTopLeft").addEventListener("click", function () {
+            map.on('click', onTopLeftClick);
+        });
+
+        // Fonction pour placer un marqueur et stocker les coordonnées du coin bas droit
+        function onBottomRightClick(e) {
+            if (bottomRight !== null) {
+                map.removeLayer(bottomRight);
+            }
+            bottomRight = L.marker(e.latlng).addTo(map);
+            console.log("Bottom right coordinates: " + e.latlng.toString());
+        }
+        document.getElementById("btnBottomRight").addEventListener("click", function () {
+            map.on('click', onBottomRightClick);
+        });
+
+        function drawRectangle() {
+            if (topLeft !== null && bottomRight !== null) {
+                var bounds = L.latLngBounds(topLeft.getLatLng(), bottomRight.getLatLng());
+                var rectangle = L.rectangle(bounds, { color: "#ff7800", weight:
+
+    </script>
+</body>
+
+</html>
