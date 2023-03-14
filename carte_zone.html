@@ -58,6 +58,19 @@
             }
         }
 
+
+
+        var distance = 10; // en mètres
+        var bearing = 90; // en degrés (direction est)
+
+        var latlng = topLeft.getLatLng();
+        var eastPoint = latlng.destination(distance, bearing);
+
+        console.log("Coordonnées 10 mètres à l'est : " + eastPoint.toString());
+
+
+
+
     </script>
 </body>
 
