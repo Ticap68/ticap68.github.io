@@ -3,9 +3,8 @@
 <meta charset="utf-8">
 
 <head>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
-        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
-        crossorigin="" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+        integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
         integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css">
@@ -35,7 +34,8 @@
         <div id=colonne2>
             <!-- bouton pour ajouter un marqueur -->
 
-            Cliquer sur ce bouton, mettre le départ en premier point, puis recliquer sur le bouton et positionner l'arrivé :<br>
+            Cliquer sur ce bouton, mettre le départ en premier point, puis recliquer sur le bouton et positionner
+            l'arrivé :<br>
             <button id="add-marker-button">Positionner un point</button> <br>
             <!--  <button id="add-marker-button">Mettre A2 sur la carte : point d'arrivé</button> <br>  -->
 
@@ -110,7 +110,7 @@
 
         function getAlti(marker) {
             let latlng = marker.getLatLng();
-            fetch('https://api.open-meteo.com/v1/elevation?latitude='+ latlng.lat + '&longitude=' + latlng.lng)
+            fetch('https://api.open-meteo.com/v1/elevation?latitude=' + latlng.lat + '&longitude=' + latlng.lng)
                 .then(response => response.json())
                 .then(data => {
                     //  const elevation = data.elevation[0];
