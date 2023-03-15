@@ -85,7 +85,7 @@
 
             // Nouvelles coordonnées à 10 mètres au nord du point de départ
             const newCoords = geolib.computeDestinationPoint(
-                { latitude: startLat, longitude: startLng },
+                { lat: startLat, lng: startLng },
                 distance,
                 0 // Angle en degrés (0 pour le nord)
             );
