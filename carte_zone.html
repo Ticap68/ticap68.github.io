@@ -9,6 +9,8 @@
         integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
         integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+    <script src="https://unpkg.com/geolib@3.3.3/lib/index.js"></script>
+
 </head>
 
 <body>
@@ -19,7 +21,7 @@
     <button id="btnRectangle">Rectangle</button>
     <button id="pointEst">point Est</button>
 
-    
+
 
     coordonnée = <span id="coordonnee"> </span>
 
@@ -68,21 +70,35 @@
 
 
 
-
-
-
         document.getElementById("pointEst").addEventListener("click", function () {
             var distance = 10; // en mètres
             var bearing = 90; // en degrés (direction est)
 
             var latlng = topLeft.getLatLng();
-            var eastPoint = latlng.destination(distance, bearing);
 
-            //console.log("Coordonnées 10 mètres à l'est : " + eastPoint.toString());
 
-            document.getElementById('coordonnee').innerHTML = eastPoint.toString();
-            point2 = L.marker(eastPoint.latlng).addTo(map);
+            const geolib = require('geolib');
+
+            // Coordonnées du point de départ
+            const startLat = latlng.lat;
+            const startLng = latlng.lng;
+
+            // Nouvelles coordonnées à 10 mètres au nord du point de départ
+            const newCoords = geolib.computeDestinationPoint(
+                { latitude: startLat, longitude: startLng },
+                distance,
+                0 // Angle en degrés (0 pour le nord)
+            );
+
+            // Affichage des nouvelles coordonnées
+            console.log(`Latitude : ${newCoords.latitude}, Longitude : ${newCoords.longitude}`);
+
+
+            document.getElementById('coordonnee').innerHTML = latlng.toString();
+            //point2 = L.marker(eastPoint.latlng).addTo(map);
         });
+
+
 
 
 
