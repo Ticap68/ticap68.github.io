@@ -74,14 +74,14 @@
             var distance = 10; // en mètres
             var bearing = 90; // en degrés (direction est)
 
-            var latlng = topLeft.getLatLng();
+            var topLeftLL = topLeft.getLatLng();
 
 
-           //const geolib = require('geolib');
+            //const geolib = require('geolib');
 
             // Coordonnées du point de départ
-            const startLat = latlng.lat;
-            const startLng = latlng.lng;
+            const startLat = topLeftLL.lat;
+            const startLng = topLeftLL.lng;
 
             // Nouvelles coordonnées à 10 mètres au nord du point de départ
             const newCoords = geolib.computeDestinationPoint(
@@ -89,13 +89,10 @@
                 distance,
                 0 // Angle en degrés (0 pour le nord)
             );
+            point2 = L.marker(newCoords.latlng).addTo(map);
 
-            // Affichage des nouvelles coordonnées
-            console.log(`Latitude : ${newCoords.latitude}, Longitude : ${newCoords.longitude}`);
+            
 
-
-            document.getElementById('coordonnee').innerHTML = latlng.toString();
-            //point2 = L.marker(eastPoint.latlng).addTo(map);
         });
 
 
