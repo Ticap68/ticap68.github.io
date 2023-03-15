@@ -36,7 +36,7 @@
         // Fonction pour placer un marqueur et stocker les coordonnées du coin haut gauche
         function onTopLeftClick(e) {
             if (topLeft == null) {
-                map.removeLayer(topLeft);
+                //map.removeLayer(topLeft);
                 topLeft = L.marker(e.latlng).addTo(map);
                 //console.log("Top left coordinates: " + e.latlng.toString());
             }
@@ -79,7 +79,7 @@
             var eastPoint = latlng.destination(distance, bearing);
 
             //console.log("Coordonnées 10 mètres à l'est : " + eastPoint.toString());
-            
+
             document.getElementById('coordonnee').innerHTML = eastPoint.toString();
             point2 = L.marker(eastPoint.latlng).addTo(map);
         });
