@@ -16,6 +16,7 @@
 
     <button id="btnTopLeft">Coin haut gauche</button>
     <button id="btnBottomRight">Coin bas droit</button>
+    <button id="btnRectangle">Rectangle</button>
 
     <script>
         var map = L.map('map').setView([47.216124, 6.055531], 6);
@@ -29,11 +30,11 @@
 
         // Fonction pour placer un marqueur et stocker les coordonnées du coin haut gauche
         function onTopLeftClick(e) {
-            if (topLeft !== null) {
+            if (topLeft == null) {
                 map.removeLayer(topLeft);
+                topLeft = L.marker(e.latlng).addTo(map);
+                //console.log("Top left coordinates: " + e.latlng.toString());
             }
-            topLeft = L.marker(e.latlng).addTo(map);
-            console.log("Top left coordinates: " + e.latlng.toString());
         }
         document.getElementById("btnTopLeft").addEventListener("click", function () {
             map.on('click', onTopLeftClick);
@@ -41,11 +42,10 @@
 
         // Fonction pour placer un marqueur et stocker les coordonnées du coin bas droit
         function onBottomRightClick(e) {
-            if (bottomRight !== null) {
-                map.removeLayer(bottomRight);
+            if (bottomRight == null) {
+                bottomRight = L.marker(e.latlng).addTo(map);
+                //console.log("Bottom right coordinates: " + e.latlng.toString());
             }
-            bottomRight = L.marker(e.latlng).addTo(map);
-            console.log("Bottom right coordinates: " + e.latlng.toString());
         }
         document.getElementById("btnBottomRight").addEventListener("click", function () {
             map.on('click', onBottomRightClick);
@@ -57,7 +57,9 @@
                 var rectangle = L.rectangle(bounds, { color: "#ff7800", weight: 1 }).addTo(map);
             }
         }
-
+        document.getElementById("btnRectangle").addEventListener("click", function () {
+            map.on('click', drawRectangle);
+        });
 
 
         var distance = 10; // en mètres
