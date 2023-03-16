@@ -19,11 +19,13 @@
     <button id="btnTopLeft">Coin haut gauche</button>
     <button id="btnBottomRight">Coin bas droit</button>
     <button id="btnRectangle">Rectangle</button>
-    <button id="pointEst">point Est</button>
+    <button id="pointEst">point Est</button><br>
+
+    coordonnée = <span id="coordonnee"> </span><br>
+
+    distance = <span id="distance"> </span>
 
 
-
-    coordonnée = <span id="coordonnee"> </span>
 
     <script>
         var map = L.map('map').setView([47.216124, 6.055531], 6);
@@ -71,40 +73,25 @@
 
 
         document.getElementById("pointEst").addEventListener("click", function () {
-            var distance = 10; // en mètres
+            var distance = 50; // en mètres
             var bearing = 90; // en degrés (direction est)
-
             var topLeftLL = topLeft.getLatLng();
-
-
-            //const geolib = require('geolib');
-
             // Coordonnées du point de départ
             const startLat = topLeftLL.lat;
             const startLng = topLeftLL.lng;
-
             // Nouvelles coordonnées à 10 mètres au nord du point de départ
             const newCoords = geolib.computeDestinationPoint(
                 { lat: startLat, lng: startLng },
                 distance,
                 0 // Angle en degrés (0 pour le nord)
             );
-
             var newLat = newCoords.latitude;
             var newLng = newCoords.longitude;
-
-
             var marker = L.marker([newLat, newLng]).addTo(map);
 
-
-            console.log(topLeftLL);
-            console.log(newCoords);
-
+            let distance = topLeftLL.distanceTo([newLat, newLng]);
+            document.getElementById('distance').innerHTML = distance;
         });
-
-
-
-
 
     </script>
 </body>
