@@ -66,8 +66,10 @@
                 var rectangle = L.rectangle(bounds, { color: "#ff7800", weight: 1 }).addTo(map);
             }
         }
+
         document.getElementById("btnRectangle").addEventListener("click", function () {
-            map.on('click', drawRectangle);
+            //map.on('click', drawRectangle);
+            drawRectangle();
         });
 
 
