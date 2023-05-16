@@ -85,31 +85,8 @@
             resultat.textContent = `${finesse}`;
         });
 
-        function getAlti2(marker) {
-            let latlng = marker.getLatLng();
-            fetch('https://api.open-elevation.com/api/v1/lookup?locations=' + latlng.lat + ',' + latlng.lng, { mode: "no-cors" }).then(response => response.json())
-                .then(data => {
-                    marker.altitude = data.results[0].elevation;
-                    console.log(marker.altitude);
-                });
-        }
-
-        function getAlti3(marker) {
-            let latlng = marker.getLatLng();
-            let api = document.getElementById('api-select').value;
-            let api_url = '';
-            if (api === 'open-elevation') {
-                api_url = 'https://api.open-elevation.com/api/v1/lookup?locations=';
-            } else if (api === 'opentopodata') {
-                api_url = 'https://api.opentopodata.org/v1/test-dataset?locations=';
-            }
-            fetch(api_url + latlng.lat + ',' + latlng.lng, { mode: "no-cors" })
-                .then(response => response.json())
-                .then(data => {
-                    marker.altitude = data.results[0].elevation;
-                    console.log(marker.altitude);
-                });
-        }
+        
+       
 
         function getAlti(marker) {
             let latlng = marker.getLatLng();
@@ -130,7 +107,7 @@
 
 
 
-        addingA1 = false;
+        let addingA1 = false;
         //Ajout de l'event de click pour ajouter un marqueur
         addMarkerButton.addEventListener('click', function () {
 
