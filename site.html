@@ -91,15 +91,14 @@
             var lat = marker.getLatLng().lat;
             var lng = marker.getLatLng().lng;
 
-            var url = "https://api.open-elevation.com/api/v1/lookup?locations=" + lat + "," + lng;
+            // var url = "https://api.open-elevation.com/api/v1/lookup?locations=" + lat + "," + lng;
 
-            // https://api.open-meteo.com/v1/elevation?latitude=' + latlng.lat + '&longitude=' + latlng.lng
+            var url = "https://api.open-meteo.com/v1/elevation?latitude=" + lat + '&longitude=' + lng;
 
             fetch(url, { mode: "no-cors" })
-                .then(function (response) {
-                    return response.json();
-                })
-                .then(function (data) {
+                .then(response => response.json())
+                .then(data => {
+
                     var elevation = data.results[0].elevation;
                     var altiSpan;
 
