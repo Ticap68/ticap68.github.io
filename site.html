@@ -16,7 +16,7 @@
 <body>
     <div class="container">
         <div id="map" style="width: 100%; height: 100%;"></div>
-        <div id=inputsFinesse>
+        <div id="inputsFinesse">
             Calculer une finesse envisagée : <br><br>
             <form id="calculator-form">
                 <label for="vitesse">Vitesse :</label>
@@ -31,146 +31,200 @@
             Finesse = <span id="finesse">___</span> <br>
         </div>
 
-        <div id=colonne2>
+        <div id="colonne2">
             <!-- bouton pour ajouter un marqueur -->
+            <button id="set-a1-button">Placer le point A1</button><br><br>
+            <button id="set-a2-button">Placer le point A2</button><br><br>
+            <button id="remove-a1-button">Supprimer le point A1</button><br><br>
+            <button id="remove-a2-button">Supprimer le point A2</button><br><br>
 
-            Cliquer sur ce bouton, mettre le départ en premier point, puis recliquer sur le bouton et positionner
-            l'arrivé : <br><br>
-            <button id="add-marker-button">Positionner un point</button> <br><br>
-            <!--  <button id="add-marker-button">Mettre A2 sur la carte : point d'arrivé</button> <br>  -->
-
-            Altitude sol départ A1 = <span id="a1">___</span> mètre <br>
-            Altitude sol arrivée A2 = <span id="a2">___</span> mètre <br><br>
+            Altitude sol départ A1 = <span id="a1">___</span> mètre<br>
+            Altitude sol arrivée A2 = <span id="a2">___</span> mètre<br><br>
 
             <!-- bouton pour supprimer les marqueurs -->
-            <button id="remove-marker-button">Enlever tous les points</button> <br>
+            <button id="remove-marker-button">Enlever tous les points</button><br>
         </div>
 
-        <div id=colonne3>
+        <div id="colonne3">
             <button id="actualiser">Actualiser</button> <br><br>
 
-            Distance entre A1 et A2 = <span id="distance">___</span> mètre <br>
-            H1 : distance / finesse = <span id="hauteur">___</span> mètre <br><br>
+            Distance entre A1 et A2 = <span id="distance">___</span> mètre<br>
+            H1 : distance / finesse = <span id="hauteur">___</span> mètre<br><br>
 
-            <b>  Altitude de départ requise par rapport à la finesse calculée en premier</b>: <br>A2 + H1 = <span id="alti">___</span> mètre <br><br>
+            <b>Altitude de départ requise par rapport à la finesse calculée en premier</b>: <br A2 + H1=<span
+                id="altiDepart">___</span> mètre<br><br>
+            <b>Altitude de déclenchement requise par rapport au sol</b>:<br>
+            <label for="altiDeclench">Pour un déclenchement à</label>
+            <input type="number" id="altiDeclench" min="0" step="1"> mètre<br>
+            <button id="calcul">Calculer la hauteur requise de lancement</button> <br><br>
 
-            Finesse sol : Distance / (A2-A1) = <span id="finesseSol">___</span> 
+            Hauteur requise de lancement = <span id="hauteurRequise">___</span> mètre<br><br>
+
+            <button id="message">Message</button><br><br>
+
+            <div id="afficheCalcul">
+                Votre calcul a été effectué avec succès !
+            </div>
         </div>
     </div>
 
-    <!--
-    <select id="api-select">
-        <option value="open-elevation">Open Elevation</option>
-        <option value="opentopodata">OpenTopoData</option>
-    </select>  -->
-
     <script>
-        var map = L.map('map').setView([47.216124, 6.055531], 6);
-        L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        var map = L.map('map').setView([46.2276, 2.2137], 6);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
         }).addTo(map);
 
-        let markers = [];
-
-        let finesse = null;
-        const calculatorForm = document.getElementById('calculator-form');
-        const resultat = document.getElementById('finesse');
-        calculatorForm.addEventListener('submit', event => {
-            event.preventDefault();
-            const vitesse = Number(document.getElementById('vitesse').value);
-            const tauxChute = Number(document.getElementById('tauxChute').value);
-            finesse = (vitesse * 1000 / 3600) / tauxChute;
-            resultat.textContent = `${finesse}`;
+        var redIcon = L.AwesomeMarkers.icon({
+            icon: 'home',
+            markerColor: 'red'
         });
 
-        function getAlti2(marker) {
-            let latlng = marker.getLatLng();
-            fetch('https://api.open-elevation.com/api/v1/lookup?locations=' + latlng.lat + ',' + latlng.lng, { mode: "no-cors" }).then(response => response.json())
-                .then(data => {
-                    marker.altitude = data.results[0].elevation;
-                    console.log(marker.altitude);
-                });
-        }
+        var greenIcon = L.AwesomeMarkers.icon({
+            icon: 'home',
+            markerColor: 'green'
+        });
 
-        function getAlti3(marker) {
-            let latlng = marker.getLatLng();
-            let api = document.getElementById('api-select').value;
-            let api_url = '';
-            if (api === 'open-elevation') {
-                api_url = 'https://api.open-elevation.com/api/v1/lookup?locations=';
-            } else if (api === 'opentopodata') {
-                api_url = 'https://api.opentopodata.org/v1/test-dataset?locations=';
-            }
-            fetch(api_url + latlng.lat + ',' + latlng.lng, { mode: "no-cors" })
-                .then(response => response.json())
-                .then(data => {
-                    marker.altitude = data.results[0].elevation;
-                    console.log(marker.altitude);
-                });
-        }
+        var markerA1 = null;
+        var markerA2 = null;
 
         function getAlti(marker) {
-            let latlng = marker.getLatLng();
-            fetch('https://api.open-meteo.com/v1/elevation?latitude=' + latlng.lat + '&longitude=' + latlng.lng)
-                .then(response => response.json())
-                .then(data => {
-                    //  const elevation = data.elevation[0];
-                    marker.altitude = data.elevation[0];
+            var lat = marker.getLatLng().lat;
+            var lng = marker.getLatLng().lng;
+
+            var url = "https://api.open-elevation.com/api/v1/lookup?locations=" + lat + "," + lng;
+
+            fetch(url)
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (data) {
+                    var elevation = data.results[0].elevation;
+                    var altiSpan;
+
+                    if (marker === markerA1) {
+                        altiSpan = document.getElementById('a1');
+                    } else if (marker === markerA2) {
+                        altiSpan = document.getElementById('a2');
+                    }
+
+                    if (altiSpan) {
+                        altiSpan.innerHTML = elevation.toFixed(2);
+                    }
+                })
+                .catch(function (error) {
+                    console.log(error);
                 });
         }
+        map.on('click', function (e) {
+            if (markerA1 && markerA2) {
+                return;
+            }
 
-        //Variable pour le nom des marqueurs
-        var markerName = 1;
+            if (!markerA1) {
+                markerA1 = L.marker(e.latlng, { icon: redIcon }).addTo(map);
+                markerA1.bindPopup("A1");
+                getAlti(markerA1);
+            } else if (!markerA2) {
+                markerA2 = L.marker(e.latlng, { icon: greenIcon }).addTo(map);
+                markerA2.bindPopup("A2");
+                getAlti(markerA2);
+            }
+        });
 
-        //Référence aux boutons HTML
-        var addMarkerButton = document.getElementById('add-marker-button');
-        var removeMarkerButton = document.getElementById('remove-marker-button');
+        // Référence aux boutons HTML
+        var setA1Button = document.getElementById('set-a1-button');
+        var setA2Button = document.getElementById('set-a2-button');
+        var removeA1Button = document.getElementById('remove-a1-button');
+        var removeA2Button = document.getElementById('remove-a2-button');
 
-        //Ajout de l'event de click pour ajouter un marqueur
-        addMarkerButton.addEventListener('click', function () {
+        // Event listeners for setting A1 and A2 markers
+        setA1Button.addEventListener('click', function () {
             map.once('click', function (e) {
-                let marker = L.marker(e.latlng).addTo(map);
-                markers.push(marker);
-                marker.bindPopup(markerName.toString());
-                markerName += 1;
-                getAlti(marker);
-            }
-            )
+                if (markerA1) {
+                    markerA1.remove();
+                    markerA1 = null;
+                }
+                markerA1 = L.marker(e.latlng, { icon: redIcon }).addTo(map);
+                markerA1.bindPopup("A1");
+                getAlti(markerA1);
+            });
+        });
+        setA2Button.addEventListener('click', function () {
+            map.once('click', function (e) {
+                if (markerA2) {
+                    markerA2.remove();
+                    markerA2 = null;
+                }
+
+                markerA2 = L.marker(e.latlng, { icon: greenIcon }).addTo(map);
+                markerA2.bindPopup("A2");
+                getAlti(markerA2);
+            });
         });
 
-        //Suppression de l'event de click pour ajouter un marqueur
+        // Event listeners for removing A1 and A2 markers
+        removeA1Button.addEventListener('click', function () {
+            if (markerA1) {
+                markerA1.remove();
+                markerA1 = null;
+                document.getElementById('a1').innerHTML = "___";
+            }
+        });
+
+        removeA2Button.addEventListener('click', function () {
+            if (markerA2) {
+                markerA2.remove();
+                markerA2 = null;
+                document.getElementById('a2').innerHTML = "___";
+            }
+        });
+
+        // Event listener for removing all markers
+        var removeMarkerButton = document.getElementById('remove-marker-button');
         removeMarkerButton.addEventListener('click', function () {
-            map.off('click');
-            markers.forEach(function (marker) {
-                marker.remove();
-            });
-            markerName = 1;
-            markers = [];
-        });
-
-        actualiser.addEventListener('click', function () {
-            markers.forEach(function (marker) {
-                //console.log(marker.getPopup().getContent() + ': ' + marker.altitude);
-            });
-
-            if (markerName > 2) {
-                markers[1].setIcon(L.AwesomeMarkers.icon({ icon: 'star', markerColor: 'red' }));
-                document.getElementById('a1').innerHTML = markers[0].altitude;
-                document.getElementById('a2').innerHTML = markers[1].altitude;
-
-                let distance = markers[0].getLatLng().distanceTo(markers[1].getLatLng());
-                document.getElementById('distance').innerHTML = distance;
-
-                let hauteur = distance / finesse;
-                document.getElementById('hauteur').innerHTML = hauteur;
-                document.getElementById('alti').innerHTML = markers[1].altitude + hauteur;
-
-                let hauteurA2A1 = markers[0].altitude - markers[1].altitude;
-                let finesse2 = distance / hauteurA2A1;
-                document.getElementById('finesseSol').innerHTML = finesse2;
+            if (markerA1) {
+                markerA1.remove();
+                markerA1 = null;
+                document.getElementById('a1').innerHTML = "___";
+            }
+            if (markerA2) {
+                markerA2.remove();
+                markerA2 = null;
+                document.getElementById('a2').innerHTML = "___";
             }
         });
 
+        var calculatorForm = document.getElementById('calculator-form');
+        calculatorForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            var vitesse = document.getElementById('vitesse').value;
+            var tauxChute = document.getElementById('tauxChute').value;
+
+            var finesse = vitesse / tauxChute;
+            document.getElementById('finesse').innerHTML = finesse.toFixed(2);
+        });
+
+        var calculButton = document.getElementById('calcul');
+        calculButton.addEventListener('click', function () {
+            var altiDeclench = document.getElementById('altiDeclench').value;
+
+            var altiDepart = parseFloat(document.getElementById('a2').innerHTML) + parseFloat(document.getElementById('hauteur').innerHTML);
+            document.getElementById('altiDepart').innerHTML = altiDepart.toFixed(2);
+
+            var hauteurRequise = altiDepart - altiDeclench;
+            document.getElementById('hauteurRequise').innerHTML = hauteurRequise.toFixed(2);
+
+            var afficheCalcul = document.getElementById('afficheCalcul');
+            afficheCalcul.style.display = "block";
+        });
+        var messageButton = document.getElementById('message');
+        messageButton.addEventListener('click', function () {
+            var hauteurRequise = document.getElementById('hauteurRequise').innerHTML;
+            var message = "La hauteur requise de lancement est de " + hauteurRequise + " mètre.";
+            alert(message);
+        });
     </script>
 </body>
 
