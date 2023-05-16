@@ -27,53 +27,35 @@
                 <br>
                 <button type="submit">Calculer</button>
             </form> <br>
-
             Finesse = <span id="finesse">___</span> <br>
         </div>
-
         <div id=colonne2>
             <!-- bouton pour ajouter un marqueur -->
-
             Cliquer sur ce bouton, mettre le départ en premier point, puis recliquer sur le bouton et positionner
             l'arrivé : <br><br>
-
             <button id="add-a1-button">Positionner A1</button> <br><br>
             <button id="add-a2-button">Positionner A2</button> <br><br>
-
             Altitude sol départ A1 = <span id="a1">___</span> mètre <br>
             Altitude sol arrivée A2 = <span id="a2">___</span> mètre <br><br>
-
             <!-- bouton pour supprimer les marqueurs -->
             <button id="remove-marker-button">Enlever tous les points</button> <br>
         </div>
-
         <div id=colonne3>
             <button id="actualiser">Actualiser</button> <br><br>
-
             Distance entre A1 et A2 = <span id="distance">___</span> mètre <br>
             H1 : distance / finesse = <span id="hauteur">___</span> mètre <br><br>
-
             <b> Altitude de départ requise par rapport à la finesse calculée en premier</b>: <br>A2 + H1 = <span
                 id="alti">___</span> mètre <br><br>
-
             Finesse sol : Distance / (A2-A1) = <span id="finesseSol">___</span>
         </div>
     </div>
-
-    <!--
-    <select id="api-select">
-        <option value="open-elevation">Open Elevation</option>
-        <option value="opentopodata">OpenTopoData</option>
-    </select>  -->
 
     <script>
         var map = L.map('map').setView([47.216124, 6.055531], 6);
         L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
-
         let markers = [];
-
         let finesse = null;
         const calculatorForm = document.getElementById('calculator-form');
         const resultat = document.getElementById('finesse');
@@ -84,59 +66,40 @@
             finesse = (vitesse * 1000 / 3600) / tauxChute;
             resultat.textContent = `${finesse}`;
         });
-
-        
-       
-
         function getAlti(marker) {
             let latlng = marker.getLatLng();
             fetch('https://api.open-meteo.com/v1/elevation?latitude=' + latlng.lat + '&longitude=' + latlng.lng)
                 .then(response => response.json())
                 .then(data => {
-                    //  const elevation = data.elevation[0];
                     marker.altitude = data.elevation[0];
                 });
         }
 
-        //Variable pour le nom des marqueurs
-        var markerName = 1;
-
-        //Référence aux boutons HTML
-        var addMarkerButton = document.getElementById('add-marker-button');
-        var removeMarkerButton = document.getElementById('remove-marker-button');
-
-
+        
+        var markerName = 1;  //Variable pour le nom des marqueurs
 
         let addingA1 = false;
-        //Ajout de l'event de click pour ajouter un marqueur
-        addMarkerButton.addEventListener('click', function () {
-
-
-            document.getElementById('add-a1-button').addEventListener('click', function () {
-                addingA1 = true;
-                map.once('click', function (e) {
-                    let marker = L.marker(e.latlng).addTo(map);
-                    markers.push(marker);
-                    marker.bindPopup(markerName.toString());
-                    markerName += 1;
-                    getAlti(marker);
-                });
+        document.getElementById('add-a1-button').addEventListener('click', function () {
+            addingA1 = true;
+            map.once('click', function (e) {
+                let marker = L.marker(e.latlng).addTo(map);
+                markers.push(marker);
+                marker.bindPopup(markerName.toString());
+                markerName += 1;
+                getAlti(marker);
             });
-            document.getElementById('add-a2-button').addEventListener('click', function () {
-                addingA1 = false;
-                map.once('click', function (e) {
-                    let marker = L.marker(e.latlng).addTo(map);
-                    markers.push(marker);
-                    marker.bindPopup(markerName.toString());
-                    markerName += 1;
-                    getAlti(marker);
-                });
-            });
-
-
         });
-
-
+        document.getElementById('add-a2-button').addEventListener('click', function () {
+            addingA1 = false;
+            map.once('click', function (e) {
+                let marker = L.marker(e.latlng).addTo(map);
+                markers.push(marker);
+                marker.bindPopup(markerName.toString());
+                markerName += 1;
+                getAlti(marker);
+            });
+        });
+        var removeMarkerButton = document.getElementById('remove-marker-button');
         //Suppression de l'event de click pour ajouter un marqueur
         removeMarkerButton.addEventListener('click', function () {
             map.off('click');
@@ -146,31 +109,25 @@
             markerName = 1;
             markers = [];
         });
-
         actualiser.addEventListener('click', function () {
             markers.forEach(function (marker) {
                 //console.log(marker.getPopup().getContent() + ': ' + marker.altitude);
             });
-
             if (markers.length >= 2) {
                 markers[0].setIcon(L.AwesomeMarkers.icon({ icon: 'star', markerColor: 'red' }));
                 markers[1].setIcon(L.AwesomeMarkers.icon({ icon: 'star', markerColor: 'red' }));
                 document.getElementById('a1').innerHTML = markers[0].altitude;
                 document.getElementById('a2').innerHTML = markers[1].altitude;
-
                 let distance = markers[0].getLatLng().distanceTo(markers[1].getLatLng());
                 document.getElementById('distance').innerHTML = distance;
-
                 let hauteur = distance / finesse;
                 document.getElementById('hauteur').innerHTML = hauteur;
                 document.getElementById('alti').innerHTML = markers[1].altitude + hauteur;
-
                 let hauteurA2A1 = markers[0].altitude - markers[1].altitude;
                 let finesse2 = distance / hauteurA2A1;
                 document.getElementById('finesseSol').innerHTML = finesse2;
             }
         });
-
     </script>
 </body>
 
