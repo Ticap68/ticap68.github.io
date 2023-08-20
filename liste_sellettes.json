@@ -19,4 +19,24 @@
         "hauteur": 45,
         "pdf": "https://cdv.li/bre/docs/Pixair2.pdf"
     }
+    {
+        "name": "Sky Gii 5 M",
+        "weight": 2.7,
+        "type": "airbag",
+        "largeur": 33,
+        "longueur": 37,
+        "dos": 0,
+        "hauteur": 45,
+        "pdf": "https://sky-cz.com/media/cache/file/2f/Gii-5-User-manual.pdf"
+    }
+    {
+        "name": "Sky Gii 4 alpha M",
+        "weight": 3.2,
+        "type": "mousse",
+        "largeur": 35,
+        "longueur": 37,
+        "dos": 0,
+        "hauteur": 45,
+        "pdf": "https://sky-cz.com/data/filecache/3a/Gii-4-Alpha-User-manual.pdf"
+    }
 ]
