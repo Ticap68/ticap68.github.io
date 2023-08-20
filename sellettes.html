@@ -46,6 +46,7 @@
                 const pdfLink = document.createElement("a"); // Créer un élément "a" pour le lien
                 pdfLink.href = sellette.pdf; // Définir l'URL du lien
                 pdfLink.textContent = sellette.pdf; // Texte du lien
+                pdfLink.target = "_blank"; // Ouvrir le lien dans un nouvel onglet
                 listItem.appendChild(listItemText); // Ajouter le texte normal
                 listItem.appendChild(pdfLink); // Ajouter le lien à l'élément <li>
                 paraglidersList.appendChild(listItem);
