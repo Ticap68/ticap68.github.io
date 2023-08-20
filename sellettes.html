@@ -39,6 +39,7 @@
 
     <script>
         const paraglidersList = document.getElementById("paragliders-list");
+        let paragliders = []; // Variable pour stocker les données des sellettes
 
         // Fonction pour afficher les sellettes dans la liste
         function displayParagliders(paraglidersArray) {
@@ -85,8 +86,8 @@
 
         // Chargement initial des sellettes
         async function loadParagliders() {
-            const data = await fetchParagliders();
-            displayParagliders(data);
+            paragliders = await fetchParagliders();
+            displayParagliders(paragliders);
         }
 
         // Appel pour charger les sellettes au démarrage
