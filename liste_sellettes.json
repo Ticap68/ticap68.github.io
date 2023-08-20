@@ -18,7 +18,7 @@
         "dos": 64,
         "hauteur": 45,
         "pdf": "https://cdv.li/bre/docs/Pixair2.pdf"
-    }
+    },
     {
         "name": "Sky Gii 5 M",
         "weight": 2.7,
@@ -28,7 +28,7 @@
         "dos": 0,
         "hauteur": 45,
         "pdf": "https://sky-cz.com/media/cache/file/2f/Gii-5-User-manual.pdf"
-    }
+    },
     {
         "name": "Sky Gii 4 alpha M",
         "weight": 3.2,
@@ -38,5 +38,25 @@
         "dos": 0,
         "hauteur": 45,
         "pdf": "https://sky-cz.com/data/filecache/3a/Gii-4-Alpha-User-manual.pdf"
+    },
+    {
+        "name": "Gin Gingo Airlite 5 S : 160 - 175",
+        "weight": 2.6,
+        "type": "airbag",
+        "largeur": 0,
+        "longueur": 0,
+        "dos": 0,
+        "hauteur": 0,
+        "pdf": "https://static.gingliders.com/pdf/hs-gingo-airlite-5-manual-en.pdf"
+    },
+    {
+        "name": "Gin Gingo 4 S : 160 - 175",
+        "weight": 3.1,
+        "type": "mousse",
+        "largeur": 0,
+        "longueur": 0,
+        "dos": 0,
+        "hauteur": 0,
+        "pdf": "https://www.gingliders.com/pdf/hs-gingo-4-manual-fr.pdf"
     }
 ]
