@@ -1,5 +1,5 @@
 [
-    { "name": "Sellette Ajson", "weight": 3.5, "type": "Type 1", "size": "M" },
-    { "name": "Sellette Bjson", "weight": 4.0, "type": "Type 2", "size": "L" }
+    { "name": "Sellette Bfgson", "weight": 4.0, "type": "airbag", "dos": 60, "pdf":"https://cdv.li/bre/docs/Pixair2.pdf" },
+    { "name": "Sellette Bjson", "weight": 4.0, "type": "mousse", "dos": 60, "pdf":"https://cdv.li/bre/docs/Pixair2.pdf" }
     
 ]
