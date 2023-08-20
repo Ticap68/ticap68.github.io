@@ -39,14 +39,19 @@
         // Fonction pour afficher les sellettes dans la liste
         function displayParagliders(paraglidersArray) {
             paraglidersList.innerHTML = "";
+
             paraglidersArray.forEach(sellette => {
                 const listItem = document.createElement("li");
                 const pdfLink = document.createElement("a"); // Créer un élément "a" pour le lien
                 pdfLink.href = sellette.pdf; // Définir l'URL du lien
-                pdfLink.textContent = `${sellette.name} - Poids: ${sellette.weight} kg, Type: ${sellette.type}, Dos: ${sellette.dos}`;
+                pdfLink.textContent = sellette.name; // Texte du lien
+                const listItemText = document.createTextNode(` - Poids: ${sellette.weight} kg, Type: ${sellette.type}, Dos: ${sellette.dos}, Lien: ${sellette.pdf}`);
                 listItem.appendChild(pdfLink); // Ajouter le lien à l'élément <li>
+                listItem.appendChild(listItemText); // Ajouter le reste du texte
                 paraglidersList.appendChild(listItem);
             });
+
+
         }
 
         // Fonction pour charger les données JSON depuis le fichier
