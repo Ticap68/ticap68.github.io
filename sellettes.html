@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Liste de Sellettes de Parapente</title>
+    <link rel="stylesheet" href="page1.css">
+</head>
+
+<body>
+    <div class="sidebar">
+        <div class="sidebar">
+            <h2>Filtrer :</h2>
+            <label for="weight-filter">Poids :</label>
+            <input type="number" id="weight-filter" min="0" step="0.1">
+
+            <label for="type-filter">Type :</label>
+            <select id="type-filter">
+                <option value="">Tous</option>
+                <option value="Type 1">Type 1</option>
+                <option value="Type 2">Type 2</option>
+                <!-- Ajoute d'autres options ici -->
+            </select>
+
+            <label for="size-filter">Taille :</label>
+            <select id="size-filter">
+                <option value="">Tous</option>
+                <option value="S">S</option>
+                <option value="M">M</option>
+                <option value="L">L</option>
+                <!-- Ajoute d'autres options ici -->
+            </select>
+
+            <button id="filter-button">Filtrer</button>
+        </div>
+
+    </div>
+    <div class="main-content">
+        <h1>Liste de Sellettes de Parapente</h1>
+        <ul id="paragliders-list">
+            <li>Nom de la Sellette 1 - Caractéristiques...</li>
+            <li>Nom de la Sellette 2 - Caractéristiques...</li>
+            <!-- Ajoute d'autres éléments de liste ici -->
+        </ul>
+    </div>
+    <script>
+
+        // script.js
+        const paraglidersList = document.getElementById("paragliders-list");
+
+        // Simulons une liste de sellettes (tu remplaceras cela par de vraies données)
+        const paragliders = [
+            { name: "Sellette A", weight: 3.5, type: "Type 1", size: "M" },
+            { name: "Sellette B", weight: 4.0, type: "Type 2", size: "L" },
+            // Ajoute d'autres sellettes ici
+        ];
+
+        // Fonction pour afficher les sellettes dans la liste
+        function displayParagliders(paraglidersArray) {
+            paraglidersList.innerHTML = "";
+            paraglidersArray.forEach(sellette => {
+                const listItem = document.createElement("li");
+                listItem.textContent = `${sellette.name} - Poids: ${sellette.weight} kg, Type: ${sellette.type}, Taille: ${sellette.size}`;
+                paraglidersList.appendChild(listItem);
+            });
+        }
+
+        // Initialisation
+        displayParagliders(paragliders);
+
+        // Fonction pour filtrer les sellettes en fonction des options
+        function filterParagliders() {
+            const weightFilter = document.getElementById("weight-filter").value;
+            const typeFilter = document.getElementById("type-filter").value;
+            const sizeFilter = document.getElementById("size-filter").value;
+
+            const filteredParagliders = paragliders.filter(sellette =>
+                sellette.weight >= weightFilter &&
+                sellette.type === typeFilter &&
+                sellette.size === sizeFilter
+            );
+
+            displayParagliders(filteredParagliders);
+        }
+
+        // Ajoute des événements aux éléments de filtrage
+        document.getElementById("weight-filter").addEventListener("change", filterParagliders);
+        document.getElementById("type-filter").addEventListener("change", filterParagliders);
+        document.getElementById("size-filter").addEventListener("change", filterParagliders);
+
+
+        document.getElementById("filter-button").addEventListener("click", filterParagliders);
+
+
+    </script>
+</body>
+
+</html>
