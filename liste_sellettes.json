@@ -1,5 +1,5 @@
 [
     { "name": "Sellette Ajson", "weight": 3.5, "type": "Type 1", "size": "M" },
     { "name": "Sellette Bjson", "weight": 4.0, "type": "Type 2", "size": "L" }
-    // Ajoute d'autres sellettes ici
+    
 ]
