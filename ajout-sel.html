@@ -5,61 +5,21 @@
 </head>
 <body>
     <h1>Ajouter une Sellette de Parapente</h1>
-    <form id="add-form">
+    <form action="ajouter.php" method="post">
         <label for="name">Nom :</label>
-        <input type="text" id="name" required>
+        <input type="text" id="name" name="name" required>
         
         <label for="weight">Poids :</label>
-        <input type="number" id="weight" min="0" step="0.1" required>
+        <input type="number" id="weight" name="weight" min="0" step="0.1" required>
         
         <label for="type">Type :</label>
-        <input type="text" id="type" required>
+        <input type="text" id="type" name="type" required>
         
         <label for="size">Taille :</label>
-        <input type="text" id="size" required>
+        <input type="text" id="size" name="size" required>
         
         <button type="submit">Ajouter</button>
     </form>
     <a href="index.html">Retour à la liste</a>
-
-    <script>
-        // Fonction pour ajouter une sellette
-        function addParaglider(name, weight, type, size) {
-            const newParaglider = { name, weight, type, size };
-            fetch('sellettes.json')
-                .then(response => response.json())
-                .then(data => {
-                    data.push(newParaglider);
-                    updateJsonFile(data);
-                });
-        }
-
-        // Mettre à jour le fichier JSON
-        function updateJsonFile(data) {
-            fetch('sellettes.json', {
-                method: 'PUT', // Ou 'POST' si tu préfères
-                body: JSON.stringify(data),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
-        }
-
-        // Écouter la soumission du formulaire d'ajout
-        const addForm = document.getElementById('add-form');
-        addForm.addEventListener('submit', function (event) {
-            event.preventDefault();
-
-            const name = document.getElementById('name').value;
-            const weight = parseFloat(document.getElementById('weight').value);
-            const type = document.getElementById('type').value;
-            const size = document.getElementById('size').value;
-
-            addParaglider(name, weight, type, size);
-
-            // Réinitialiser le formulaire
-            addForm.reset();
-        });
-    </script>
 </body>
 </html>
