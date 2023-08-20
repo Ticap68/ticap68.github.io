@@ -74,13 +74,14 @@
             const sizeFilter = document.getElementById("size-filter").value;
 
             const filteredParagliders = paragliders.filter(sellette =>
-                sellette.weight >= weightFilter &&
-                sellette.type === typeFilter &&
-                sellette.size === sizeFilter
+                (weightFilter === "" || sellette.weight >= weightFilter) &&
+                (typeFilter === "" || sellette.type === typeFilter) &&
+                (sizeFilter === "" || sellette.size === sizeFilter)
             );
 
             displayParagliders(filteredParagliders);
         }
+
 
         // Ajoute des événements aux éléments de filtrage
         document.getElementById("weight-filter").addEventListener("change", filterParagliders);
