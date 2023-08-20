@@ -41,7 +41,7 @@
             paraglidersList.innerHTML = "";
             paraglidersArray.forEach(sellette => {
                 const listItem = document.createElement("li");
-                listItem.textContent = `${sellette.name} - Poids: ${sellette.weight} kg, Type: ${sellette.type}, Dos: ${sellette.dos}`;
+                listItem.textContent = `${sellette.name} - Poids: ${sellette.weight} kg, Type: ${sellette.type}, Dos: ${sellette.dos}, pdf: ${sellette.pdf}`;
                 paraglidersList.appendChild(listItem);
             });
         }
