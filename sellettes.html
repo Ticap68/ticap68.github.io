@@ -42,14 +42,15 @@
 
             paraglidersArray.forEach(sellette => {
                 const listItem = document.createElement("li");
+                const listItemText = document.createTextNode(`Sellette: ${sellette.name} - Poids: ${sellette.weight} kg, Type: ${sellette.type}, Dos: ${sellette.dos}, `);
                 const pdfLink = document.createElement("a"); // Créer un élément "a" pour le lien
                 pdfLink.href = sellette.pdf; // Définir l'URL du lien
-                pdfLink.textContent = sellette.name; // Texte du lien
-                const listItemText = document.createTextNode(` - Poids: ${sellette.weight} kg, Type: ${sellette.type}, Dos: ${sellette.dos}, Lien: ${sellette.pdf}`);
+                pdfLink.textContent = sellette.pdf; // Texte du lien
+                listItem.appendChild(listItemText); // Ajouter le texte normal
                 listItem.appendChild(pdfLink); // Ajouter le lien à l'élément <li>
-                listItem.appendChild(listItemText); // Ajouter le reste du texte
                 paraglidersList.appendChild(listItem);
             });
+
 
 
         }
