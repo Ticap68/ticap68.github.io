@@ -1,5 +1,16 @@
 [
-    { "name": "Sellette Bfgson", "weight": 4.0, "type": "airbag", "dos": 60, "pdf":"https://cdv.li/bre/docs/Pixair2.pdf" },
-    { "name": "Sellette Bjson", "weight": 4.0, "type": "mousse", "dos": 60, "pdf":"https://cdv.li/bre/docs/Pixair2.pdf" }
-    
+    {
+        "name": "Sellette Bfgson",
+        "weight": 4.0,
+        "type": "airbag",
+        "dos": 60,
+        "pdf": "https://cdv.li/bre/docs/Pixair2.pdf"
+    },
+    {
+        "name": "Sellette Bjson",
+        "weight": 4.0,
+        "type": "mousse",
+        "dos": 60,
+        "pdf": "https://cdv.li/bre/docs/Pixair2.pdf"
+    }
 ]
