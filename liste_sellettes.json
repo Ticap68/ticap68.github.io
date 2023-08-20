@@ -1,16 +1,22 @@
 [
     {
-        "name": "Sellette Bfgson",
-        "weight": 4.0,
+        "name": "Supair Pixair 2 S",
+        "weight": 3.2,
         "type": "airbag",
-        "dos": 60,
+        "largeur": 35,
+        "longueur": 46,
+        "dos": 57,
+        "hauteur": 44,
         "pdf": "https://cdv.li/bre/docs/Pixair2.pdf"
     },
     {
-        "name": "Sellette Bjson",
-        "weight": 4.0,
-        "type": "mousse",
-        "dos": 60,
+        "name": "Supair Pixair 2 M",
+        "weight": 3.3,
+        "type": "airbag",
+        "largeur": 37,
+        "longueur": 47,
+        "dos": 64,
+        "hauteur": 45,
         "pdf": "https://cdv.li/bre/docs/Pixair2.pdf"
     }
 ]
