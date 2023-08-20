@@ -48,7 +48,7 @@
 
             paraglidersArray.forEach(sellette => {
                 const listItem = document.createElement("li");
-                const listItemText = document.createTextNode(`Sellette: ${sellette.name} - Poids: ${sellette.weight} kg, Type: ${sellette.type}, Dos: ${sellette.dos}, `);
+                const listItemText = document.createTextNode(`${sellette.name} - Poids : ${sellette.weight} kg , Type : ${sellette.type} , Dos: ${sellette.dos} , largeur: ${sellette.largeur} , longueur: ${sellette.longueur} , `);
                 const pdfLink = document.createElement("a"); // Créer un élément "a" pour le lien
                 pdfLink.href = sellette.pdf; // Définir l'URL du lien
                 pdfLink.textContent = sellette.pdf; // Texte du lien
